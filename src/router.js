@@ -30,20 +30,20 @@ export const menuList = [{
     },
     {
         title: '测试',
-        path: '/songs',
-        name: 'Songs',
+        path: '/songs1',
+        name: 'Songs1',
         component: Songs,
         meta: {
-            title: '路由2',
+            title: '路由3',
         },
     },
     {
         title: '测试',
-        path: '/songs',
-        name: 'Songs',
+        path: '/songs2',
+        name: 'Songs2',
         component: Songs,
         meta: {
-            title: '路由2',
+            title: '路由4',
         },
     },
 ]

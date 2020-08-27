@@ -71,6 +71,7 @@ export default {
     },
     methods: {
         changeTheme(themeKey) {
+            console.log('1:', 1);
             storage.set(THEME_KEY, themeKey);
             const theme = this.themeMap[themeKey].file;
             Object.keys(theme).forEach(key => {
@@ -79,7 +80,6 @@ export default {
             });
         }
     },
-    components: {}
 };
 </script>
 

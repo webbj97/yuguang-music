@@ -10,12 +10,12 @@ import App from './App.vue'
 import router from './router'
 
 import '@/style/index.scss'
+import '@/utils/axios'
 
 import global from '@/utils/global.js'
 
-Vue.use(global)
-
 Vue.config.productionTip = false
+Vue.use(global)
 
 new Vue({
   router,
