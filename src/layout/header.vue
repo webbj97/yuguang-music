@@ -14,17 +14,24 @@
 </template>
 
 <script>
-import Theme from "@/components/theme"
+import Theme from "@/components/theme";
+import { getPersonalizedMv } from "@/api";
 //import x from ''
 
 export default {
-    components: {Theme},
+    components: { Theme },
     data() {
         return {};
     },
     computed: {},
-    methods: {},
-    mounted() {}
+    mounted() {
+        // this.getMvList();
+    },
+    methods: {
+        async getMvList(){
+            await getPersonalizedMv();
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>
