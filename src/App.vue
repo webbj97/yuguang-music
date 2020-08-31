@@ -5,22 +5,23 @@
  * @Date: 2020-07-31 18:25:25
 -->
 <template>
-  <div id="app">
-    <layout />
-  </div>
+    <div id="app">
+        <layout />
+    </div>
 </template>
 
 <script>
 import layout from "@/layout";
 
 export default {
-  name: "App",
-  components: { layout }
+    name: "App",
+    components: { layout }
 };
 </script>
 
 <style>
 #app {
-  height: 100%;
+    height: 100%;
+    background-color: var(--body-bgcolor);
 }
 </style>

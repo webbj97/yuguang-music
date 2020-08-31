@@ -8,6 +8,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const Discover = () => import('@/page/descover'); // 发现页面
+const PlaylistDetails = () => import('@/page/playlist-details'); // 发现页面
 const Songs = () => import( /* webpackChunkName: "Songs" */ '@/page/songs'); // 音乐
 
 export const menuList = [{
@@ -55,6 +56,11 @@ export default new Router({
     routes: [{
             path: '/',
             redirect: '/discover',
+        },
+        {
+            path: '/playlist/:id',
+            name: 'playlist',
+            component: PlaylistDetails,
         },
         ...menuList,
     ],

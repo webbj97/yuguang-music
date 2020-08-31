@@ -7,14 +7,21 @@
 <!-- 组件说明 -->
 <template>
     <div class="discover">
-        <div class="discover-content">1</div>
+        <Banner />
+        <PlayList />
+        <NewSongs />
+        <PlayMv />
     </div>
 </template>
 
 <script>
-//import x from ''
+import Banner from "./banner";
+import PlayList from "./play-list";
+import NewSongs from "./new-songs";
+import PlayMv from "./play-mv";
+
 export default {
-    components: {},
+    components: { Banner, PlayList, NewSongs, PlayMv },
     data() {
         return {
             mvList: [
@@ -82,4 +89,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.discover {
+    padding: 18px 32px;
+}
 </style>

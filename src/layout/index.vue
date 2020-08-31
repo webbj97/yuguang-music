@@ -58,7 +58,6 @@ export default {
             .router-view-center {
                 max-width: $center-content-max-width;
                 margin: auto;
-                border: 1px solid red;
             }
         }
     }

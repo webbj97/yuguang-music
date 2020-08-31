@@ -12,7 +12,7 @@ import router from './router'
 import '@/style/index.scss'
 import '@/utils/axios'
 
-import global from '@/utils/global.js'
+import global from '@/utils/global.js' // 全局配置
 
 Vue.config.productionTip = false
 Vue.use(global)
