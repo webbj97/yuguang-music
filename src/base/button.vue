@@ -14,6 +14,7 @@
 <script>
 //import x from ''
 export default {
+    name: 'YgButton',
     components: {},
     data() {
         return {};

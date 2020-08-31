@@ -6,7 +6,10 @@
  */
 import { request } from '@/utils';
 
-export const getPersonalizedMv = () => {
-    console.log('调用了getPersonalizedMv:', );
-    request.get(`/personalized/mv`);
-}
+export const getBanner = () => request.get('/banner?type=0'); // 首页轮播
+
+export const getNewSongs = () => request.get('/personalized/newsong'); // 最新音乐
+
+export const getPersonalized = params => request.get('/personalized', { params }) // 推荐歌单
+
+export const getPersonalizedMv = () => request.get(`/personalized/mv`) // mv

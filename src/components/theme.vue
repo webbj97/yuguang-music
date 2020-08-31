@@ -5,20 +5,16 @@
  * @Date: 2020-08-04 16:25:59
 -->
 <template>
-    <div class="theme">
-        <el-popover placement="top" v-model="visible" width="230">
-            <div class="themes">
-                <div
-                    @click="changeTheme(themeKey)"
-                    class="theme-item"
-                    v-for="(themeValue, themeKey, index) in themeMap"
-                    :key="index"
-                >
-                    <div :style="themeValue.style" class="theme-icon"></div>
-                    <p>{{themeValue.title}}</p>
-                </div>
-            </div>
-        </el-popover>
+    <div class="themes">
+        <div
+            v-for="(themeValue, themeKey, index) in themeMap"
+            @click="changeTheme(themeKey)"
+            class="theme-item"
+            :key="index"
+        >
+            <div :style="themeValue.style" class="theme-icon"></div>
+            <p>{{themeValue.title}}</p>
+        </div>
     </div>
 </template>
 
@@ -71,7 +67,6 @@ export default {
     },
     methods: {
         changeTheme(themeKey) {
-            console.log('1:', 1);
             storage.set(THEME_KEY, themeKey);
             const theme = this.themeMap[themeKey].file;
             Object.keys(theme).forEach(key => {
@@ -79,12 +74,16 @@ export default {
                 document.documentElement.style.setProperty(key, value);
             });
         }
-    },
+    }
 };
 </script>
 
 <style lang="scss" scoped>
 .themes {
+    justify-content: space-around;
+    display: flex;
+    align-items: center;
+    width: 200px;
     .theme-item {
         flex-direction: column;
         margin: 0 8px;

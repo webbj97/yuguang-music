@@ -15,7 +15,6 @@
 
 <script>
 import Theme from "@/components/theme";
-import { getPersonalizedMv } from "@/api";
 //import x from ''
 
 export default {
@@ -25,12 +24,9 @@ export default {
     },
     computed: {},
     mounted() {
-        // this.getMvList();
     },
     methods: {
-        async getMvList(){
-            await getPersonalizedMv();
-        }
+
     }
 };
 </script>
