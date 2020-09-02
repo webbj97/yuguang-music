@@ -9,17 +9,17 @@
     <div class="play-list">
         <YgTitle>推荐歌单</YgTitle>
         <div class="play-list__content">
-            <PlayistCard v-for="item in playlist" :key="item.id" :data="item" />
+            <PlayListCard v-for="item in playlist" :key="item.id" :data="item" />
         </div>
     </div>
 </template>
 
 <script>
 import { getPersonalized } from "@/api";
-import PlayistCard from "@/components/play-list-card";
+import PlayListCard from "@/components/play-list-card";
 
 export default {
-    components: { PlayistCard },
+    components: { PlayListCard },
     data() {
         return {
             playlist: [

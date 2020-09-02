@@ -7,7 +7,9 @@
 import {
     Popover,
     Carousel,
-    CarouselItem
+    CarouselItem,
+    Table,
+    TableColumn
 } from "element-ui"
 import VueLazyload from 'vue-lazyload'
 const LOAD_IMG = 'https://hlgcdn.oss-cn-hangzhou.aliyuncs.com/hlg-ui/1574069829136/9727212.png'; // 加载中的图片
@@ -34,6 +36,8 @@ export default {
         Vue.use(Popover)
         Vue.use(Carousel)
         Vue.use(CarouselItem)
+        Vue.use(Table)
+        Vue.use(TableColumn)
 
         Vue.use(VueLazyload, {
             loading: LOAD_IMG, //加载中图片，一定要有，不然会一直重复加载占位图
