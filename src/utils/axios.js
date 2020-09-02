@@ -37,7 +37,6 @@ function handleError(e) {
 }
 
 function handleResponse(response) {
-    console.log('response:', response);
     return response.data;
 }
 

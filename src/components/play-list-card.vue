@@ -9,6 +9,9 @@
     <div class="play-list-card" @click="onMoveList(data)">
         <div class="img-wrap">
             <img class="img-wrap__img" v-lazy="data.picUrl" alt="推荐歌单" />
+            <div class="img-wrap__icon">
+                <Icon type="bofang" />
+            </div>
             <div class="img-wrap__desc" v-if="data.copywriter">{{ data.copywriter }}</div>
             <!-- <PlayIcon :size="36" class="play-icon" /> -->
         </div>
@@ -17,7 +20,6 @@
 </template>
 
 <script>
-
 export default {
     components: {},
     props: {
@@ -80,7 +82,26 @@ export default {
             transform: translate(0, -100%);
             transition: all 0.2s;
         }
+        &__icon{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            @include flex-center();
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            opacity: 0;
+            transition: .2s opacity;
+            i{
+                font-style: 12px;
+                color: $music-color;
+            }
+        }
         &:hover {
+            .img-wrap__icon{
+                opacity: 1;
+            }
             .img-wrap__desc {
                 transform: translate(0, 0);
             }

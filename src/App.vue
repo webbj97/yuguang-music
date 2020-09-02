@@ -6,22 +6,25 @@
 -->
 <template>
     <div id="app">
-        <layout />
+        <Layout />
+        <BottomPlayer />
     </div>
 </template>
 
 <script>
-import layout from "@/layout";
+import Layout from "@/layout";
+import BottomPlayer from "@/components/bottom-player";
 
 export default {
     name: "App",
-    components: { layout }
+    components: { Layout, BottomPlayer }
 };
 </script>
 
 <style>
 #app {
     height: 100%;
+    min-width: 1000px;
     background-color: var(--body-bgcolor);
 }
 </style>
