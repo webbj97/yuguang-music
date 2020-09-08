@@ -1,3 +1,9 @@
+<!--
+ * @desc:
+ * @Author: 余光
+ * @Email: webbj97@163.com
+ * @Date: 2020-08-31 09:42:27
+-->
 !<!-- 组件说明 -->
 <template>
     <div class="new-song-card">
@@ -38,11 +44,7 @@ export default {
     align-items: center;
     width: 50%;
     &__img {
-        width: 100px;
-        height: 100px;
-        img {
-            width: 100%;
-        }
+        @include img-wrap(100px);
     }
     &__info {
         margin-left: 20px;

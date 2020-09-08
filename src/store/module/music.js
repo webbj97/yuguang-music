@@ -17,14 +17,15 @@ function getRandomIndex(playList, currentIndex) {
     if (index === currentIndex) {
         index = getRandomIndex(playList, currentIndex)
     }
-    return index
+    return index;
 }
 
 const getters = {
     currentSong: ({ currentSong }) => currentSong,
-    currentTime: ({currentTime}) => currentTime,
+    currentTime: ({ currentTime }) => currentTime,
     playing: ({ playing }) => playing,
     playList: ({ playList }) => playList,
+    playMode: ({ playMode }) => playMode,
     currentIndex: ({ currentSong, playList }) => {
         return playList.findIndex(({ id }) => id === currentSong.id);
     },
@@ -64,8 +65,7 @@ const getters = {
             [playModeMap.random.code]: getRandomNextIndex
         }
         const getNextStrat = nextStratMap[playMode];
-        const index = getNextStrat()
-        console.log('index:', index);
+        const index = getNextStrat();
         return playList[index];
 
         // 顺序
@@ -118,7 +118,7 @@ const actions = {
     // 存储播放列表
     setPlayList({ commit }, playList) {
         commit('SET_PLAY_LIST', playList);
-    }
+    },
 }
 
 const mutations = {
@@ -133,7 +133,7 @@ const mutations = {
     },
     [SET_PLAY_LIST](state, playList) {
         state.playList = playList;
-    }
+    },
 };
 
 export default {

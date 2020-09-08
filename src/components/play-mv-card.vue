@@ -10,7 +10,7 @@
         <div class="img-wrap">
             <img class="img-wrap__img" v-lazy="data.picUrl" alt="推荐歌单" />
             <div class="img-wrap__desc" v-if="data.copywriter">{{ data.copywriter }}</div>
-            <!-- <PlayIcon :size="36" class="play-icon" /> -->
+            <Icon type="bofang" />
         </div>
         <p class="play-mv-card__name">{{ data.name }}</p>
     </div>

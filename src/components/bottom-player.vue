@@ -32,6 +32,18 @@
             <div>1</div>
             <div>2</div>
         </div>
+
+        <!-- 模式 -->
+        <el-popover placement="top" trigger="hover" width="160">
+            <p>{{ playModeText }}</p>
+            <Icon
+                :size="20"
+                :type="modeIcon"
+                @click="onChangePlayMode"
+                class="mode-item"
+                slot="reference"
+            />
+        </el-popover>
         <audio
             :src="currentSong.url"
             @canplay="onReady"
@@ -44,7 +56,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { formatTime, isDef } from "@/utils";
+import { formatTime, isDef, playModeMap } from "@/utils";
 
 export default {
     components: {},
@@ -58,6 +70,7 @@ export default {
             "currentSong",
             "currentTime",
             "playing",
+            "playMode",
             "prevSong",
             "nextSong"
         ]),
@@ -69,6 +82,15 @@ export default {
         },
         hasCurrentSong() {
             return isDef(this.currentSong.id);
+        },
+        currentMode() {
+            return playModeMap[this.playMode];
+        },
+        playModeText() {
+            return this.currentMode.name;
+        },
+        modeIcon() {
+            return this.currentMode.icon;
         }
     },
     watch: {
@@ -155,6 +177,10 @@ export default {
         // 下一曲
         handleNext() {
             this.startSong(this.nextSong);
+        },
+        // 切换
+        onChangePlayMode() {
+            console.log("切换");
         }
     }
 };

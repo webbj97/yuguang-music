@@ -13,46 +13,22 @@
 !<!-- 组件说明 -->
 <template>
     <div class="playlist-details" v-if="playlist.id">
-        <!-- <div class="playlist-details__header">
-            <div class="img-wrap">
-                <img v-lazy="playlist.coverImgUrl" alt="歌单" />
-            </div>
-            <div class="info">
-                <div>
-                    <span class="info__icon">图标</span>
-                    <span class="info__name">{{playlist.name}}</span>
-                </div>
-                <div>
-                    <img class="info__avatar" v-lazy="playlist.creator.avatarUrl" alt="头像" />
-                    <span>{{playlist.creator.nickname}}</span>
-                </div>
-                <div class="details">
-                    <span>标签：</span>
-                    <a href="javascript:void(0)" v-for="tag in playlist.tags" :key="tag">{{tag}}</a>
-                </div>
-                <div class="details">
-                    <span class="details__title">歌曲数：</span>
-                    {{playlist.trackCount}}
-                    <span class="details__title">播放量：</span>
-                    {{playlist.playCount}}
-                </div>
-                <div class="details">
-                    <span>简介：</span>
-                    <p class="details__desc">{{playlist.description}}</p>
-                </div>
-            </div>
-        </div> -->
-        <SongTable :songs="songs"/>
+        <DetailsHeader :playlist="playlist" />
+        <SongTable v-if="songs.length" :songs="songs" />
     </div>
 </template>
 
 <script>
 import { getListDetail, getSongDetail } from "@/api";
 import SongTable from "@/components/song-table";
-import { createSong, formatTime } from "@/utils";
+import DetailsHeader from './header';
+import { createSong } from "@/utils";
+import { Loading } from "element-ui";
+
 const MAX_LIST_LENGTH = 30;
+
 export default {
-    components: { SongTable },
+    components: { SongTable, DetailsHeader },
     data() {
         return {
             playlist: {
@@ -69,6 +45,7 @@ export default {
                 tags: ["另类/独立", "摇滚", "欧美"],
                 trackCount: 191,
                 userId: 39141174,
+                createTime: 1592490688143,
                 creator: {
                     avatarUrl:
                         "http://p1.music.126.net/bUeeRJ1kk1I7p5yE3a64EA==/109951165261289393.jpg",
@@ -78,7 +55,7 @@ export default {
                         "歌单不接推广，音乐人勿私信。↵分享全球范围内最新上线的Shoegaze|DreamPop| Post Punk | Indie Rock/ Pop | Synthwave|Synthpop等↵↵Blogger and promoter who likes everything from shoegaze to dream pop and jangle pop to twee pop.↵↵Reality is only a term, based on values and well worn principles, whereas the dream goes on forever."
                 }
             },
-            songs: [],
+            songs: []
         };
     },
     computed: {
@@ -92,17 +69,16 @@ export default {
     methods: {
         async init() {
             const { id } = this;
-            const { playlist, privileges } = await getListDetail({ id });
+            const { playlist } = await getListDetail({ id });
             // this.playlist = playlist;
-            // this.getData(this.playlist)
-            console.log("playlist:", playlist);
+            console.log('playlist:', playlist);
             this.getSonglist(playlist);
         },
         // 获取歌单内歌曲
         async getSonglist(playlist) {
-            console.log("playlist:", playlist);
+            const loadingInstance = Loading.service({ target: '.playlist-details', text: "加载中" });
             const trackIds = playlist.trackIds.map(({ id }) => id); // 歌曲id数组
-            const { songs, privileges } = await getSongDetail(
+            const { songs } = await getSongDetail(
                 trackIds.slice(0, MAX_LIST_LENGTH)
             );
 
@@ -118,7 +94,7 @@ export default {
                 })
             );
             this.songs = newSongs;
-            console.log('this.songs:', this.songs[0]);
+            loadingInstance.close();
         }
         // 调整song数据结构
     }
@@ -128,45 +104,5 @@ export default {
 <style lang='scss' scoped>
 .playlist-details {
     padding: 20px;
-    &__header {
-        display: flex;
-        justify-content: space-between;
-        img {
-            width: 100%;
-        }
-        .img-wrap {
-            width: 200px;
-            height: 200px;
-        }
-        .info {
-            &__name {
-                font-size: 24px;
-                font-weight: 500;
-            }
-            &__icon {
-                padding: 4px 8px;
-                border: 2px solid rgb(165, 51, 51);
-                border-radius: 4px;
-                font-size: 14px;
-            }
-            &__avatar {
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-            }
-        }
-        .details {
-            color: #eee;
-            font-size: 14px;
-            &__title {
-                color: #ccc;
-            }
-            &__desc {
-                @include ellipsis-more(2);
-            }
-        }
-    }
-    &__content {
-    }
 }
 </style>
