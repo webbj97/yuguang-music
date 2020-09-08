@@ -45,7 +45,6 @@ export default {
         .layout-menu {
             // 这个100%是继承了父级高度
             height: calc(100% - #{$mini-player-height});
-            border: 1px solid black;
         }
 
         .content {

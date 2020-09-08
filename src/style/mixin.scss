@@ -36,3 +36,8 @@
     align-items: center;
     justify-content: center;
 }
+
+@mixin clo-center() {
+    display: flex;
+    align-items: center;
+}
