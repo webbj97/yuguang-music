@@ -10,7 +10,7 @@
         <div class="menu__wrap">
             <div class="item" v-for="(item, index) in menuList" :key="index">
                 <router-link class="link" active-class="link-active" :to="item.path">
-                    <!-- <Icon :size="16" :type="item.meta.icon" class="iconfont" /> -->
+                    <Icon :size="16" :type="item.meta.icon" class="iconfont" />
                     <span class="menu-title">{{ item.meta.title }}</span>
                 </router-link>
             </div>
@@ -57,7 +57,6 @@ export default {
     .link {
         width: 100%;
         height: 100%;
-        text-align: center;
         line-height: 44px;
         &-active {
             background: #ccc;

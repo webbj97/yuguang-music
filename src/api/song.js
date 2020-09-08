@@ -6,4 +6,4 @@
  */
 import { request } from '@/utils'
 
-export const getSongDetail = ids => request.get(`/song/detail?ids=${ids}`)
+export const getSongDetail = ids => request.get(`/song/detail?ids=${ids}`); //歌曲详情

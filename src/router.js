@@ -16,8 +16,8 @@ export const menuList = [{
         name: 'Discover',
         component: Discover,
         meta: {
-            title: '路由1',
-            icon: 'music',
+            title: '发现音乐',
+            icon: 'yinle',
         },
     },
     {
@@ -26,25 +26,8 @@ export const menuList = [{
         name: 'Songs',
         component: Songs,
         meta: {
-            title: '路由2',
-        },
-    },
-    {
-        title: '测试',
-        path: '/songs1',
-        name: 'Songs1',
-        component: Songs,
-        meta: {
-            title: '路由3',
-        },
-    },
-    {
-        title: '测试',
-        path: '/songs2',
-        name: 'Songs2',
-        component: Songs,
-        meta: {
-            title: '路由4',
+            title: '视频',
+            icon: 'ziyuan',
         },
     },
 ]
