@@ -6,7 +6,7 @@
  */
 import storage from 'good-storage'
 import { PLAY_HISTORY_KEY, getSongImg, playModeMap } from '@/utils'
-import { SET_CURRENT_SONG, SET_PLAY_STATE, SET_CURRENT_TIME, SET_PLAY_LIST } from '../type.js'
+import { SET_CURRENT_SONG, SET_PLAY_STATE, SET_CURRENT_TIME, SET_PLAY_LIST, SET_PLAY_MODE, SET_PLAY_LIST_SHOW } from '../type.js'
 
 function getRandomIndex(playList, currentIndex) {
     // 防止无限循环
@@ -26,6 +26,7 @@ const getters = {
     playing: ({ playing }) => playing,
     playList: ({ playList }) => playList,
     playMode: ({ playMode }) => playMode,
+    playListShow: ({ playListShow }) => playListShow,
     currentIndex: ({ currentSong, playList }) => {
         return playList.findIndex(({ id }) => id === currentSong.id);
     },
@@ -110,7 +111,6 @@ const actions = {
     setPlayingState({ commit }, type) {
         commit('SET_PLAY_STATE', type);
     },
-
     // 设置当前时间
     setCurrentTime({ commit }, time) {
         commit('SET_CURRENT_TIME', time);
@@ -119,6 +119,13 @@ const actions = {
     setPlayList({ commit }, playList) {
         commit('SET_PLAY_LIST', playList);
     },
+    // 设置播放模式
+    setPlayMode({ commit }, code) {
+        commit('SET_PLAY_MODE', code);
+    },
+    setPlayListShow({ commit }, show) {
+        commit('SET_PLAY_LIST_SHOW', show)
+    }
 }
 
 const mutations = {
@@ -134,6 +141,12 @@ const mutations = {
     [SET_PLAY_LIST](state, playList) {
         state.playList = playList;
     },
+    [SET_PLAY_MODE](state, code) {
+        state.playMode = code;
+    },
+    [SET_PLAY_LIST_SHOW](state, show) {
+        state.playListShow = show;
+    }
 };
 
 export default {
@@ -147,5 +160,6 @@ export default {
         currentTime: 0, // 当前时长
         playMode: playModeMap.sequence.code, // 播放模式
         playList: [], // 播放列表数据
+        playListShow: false, // 播放列表
     }
 }
