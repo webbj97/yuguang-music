@@ -2,8 +2,8 @@
 <template>
     <div class="bottom-player">
         <!-- 信息 -->
-        <template v-if="hasCurrentSong">
-            <div class="bottom-player__info">
+        <div class="bottom-player__info">
+            <template v-if="hasCurrentSong">
                 <div class="img-wrap">
                     <img v-lazy="currentSong.img" alt="音乐图片" />
                 </div>
@@ -14,36 +14,38 @@
                     </div>
                     <div>{{formatTime(currentTime)}} / {{currentSong.durationStr}}</div>
                 </div>
-            </div>
-        </template>
+            </template>
+        </div>
 
-        <!-- 播放 -->
+        <!-- 操作 -->
         <div class="bottom-player__control">
-            <Icon class="icon" type="shangyiqu" @click="handlePrev" />
+            <Icon class="icon" :size="22" type="shangyiqu" @click="handlePrev" />
 
             <div class="icon-box">
                 <Icon :type="playIcon" @click="onTogglePlay" />
             </div>
 
-            <Icon class="icon" type="xiayiqu" @click="handleNext" />
+            <Icon class="icon" :size="22" type="xiayiqu" @click="handleNext" />
         </div>
+
         <!-- 操作 -->
         <div class="bottom-player__groups">
             <div>1</div>
-            <div>2</div>
+
+            <Icon :size="20" type="playlist" @click="togglePlayListShow" />
+
+            <el-popover placement="top" trigger="hover" width="160">
+                <p>{{ playModeText }}</p>
+                <Icon
+                    :size="20"
+                    :type="modeIcon"
+                    @click="onChangePlayMode"
+                    class="mode-item"
+                    slot="reference"
+                />
+            </el-popover>
         </div>
 
-        <!-- 模式 -->
-        <el-popover placement="top" trigger="hover" width="160">
-            <p>{{ playModeText }}</p>
-            <Icon
-                :size="20"
-                :type="modeIcon"
-                @click="onChangePlayMode"
-                class="mode-item"
-                slot="reference"
-            />
-        </el-popover>
         <audio
             :src="currentSong.url"
             @canplay="onReady"
@@ -59,10 +61,10 @@ import { mapActions, mapGetters } from "vuex";
 import { formatTime, isDef, playModeMap } from "@/utils";
 
 export default {
-    components: {},
+    components: { },
     data() {
         return {
-            songReady: false
+            songReady: false,
         };
     },
     computed: {
@@ -72,7 +74,8 @@ export default {
             "playing",
             "playMode",
             "prevSong",
-            "nextSong"
+            "nextSong",
+            "playListShow"
         ]),
         audio() {
             return this.$refs.audio;
@@ -129,7 +132,9 @@ export default {
         ...mapActions("music", [
             "setPlayingState",
             "setCurrentTime",
-            "startSong"
+            "setPlayMode",
+            "startSong",
+            "setPlayListShow"
         ]),
         formatTime,
         // 加载回调
@@ -180,7 +185,19 @@ export default {
         },
         // 切换
         onChangePlayMode() {
-            console.log("切换");
+            const keyMaps = Object.keys(playModeMap);
+            const currentIndex = keyMaps.findIndex(
+                item => item === this.playMode
+            );
+            const nextIndex = (currentIndex + 1) % keyMaps.length; // 下一个下标
+            const nextModeKey = keyMaps[nextIndex]; // 属性
+            const nextMode = playModeMap[nextModeKey]; // 值
+
+            this.setPlayMode(nextMode.code);
+        },
+        // 播放列表
+        togglePlayListShow(){
+            this.setPlayListShow(!this.playListShow)
         }
     }
 };
@@ -200,8 +217,8 @@ export default {
     height: $mini-player-height;
     padding: 8px 16px;
     padding-right: 24px;
-    // background: var(--body-bgcolor);
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--body-bgcolor);
+    box-shadow: 1px -1px 1px #ddd;
     &__info {
         display: flex;
         align-items: center;
@@ -221,9 +238,18 @@ export default {
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-50%, -50%);
         @include flex-center();
+        transform: translate(-50%, -50%);
         width: 200px;
+        .icon-box {
+            @include flex-center();
+            margin: 0 15px;
+            width: 46px;
+            height: 46px;
+            border-radius: 23px;
+            color: $white;
+            background: $theme-color;
+        }
     }
     &__groups {
         @include flex-center();
