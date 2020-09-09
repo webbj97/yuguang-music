@@ -23,6 +23,13 @@ export function pad(num, n = 2) {
     return num;
 }
 
+/**
+ * 切换时间展示方式
+ *
+ * @export:
+ * @param {number} interval 传入秒
+ * @return {type} 返回 xx:xx 格式
+ */
 export function formatTime(interval) {
     interval = interval | 0;
     const minute = pad((interval / 60) | 0);
@@ -63,4 +70,51 @@ export function formatDate(date, fmt = 'yyyy-MM-dd hh:mm:ss') {
         }
     }
     return fmt
+}
+
+/**
+ * 全屏
+ *
+ * @export:
+ * @param {type}
+ * @return {type}
+ */
+export function requestFullScreen(element) {
+    const docElm = element;
+    if (docElm.requestFullscreen) {
+        docElm.requestFullscreen();
+    } else if (docElm.msRequestFullscreen) {
+        docElm.msRequestFullscreen();
+    } else if (docElm.mozRequestFullScreen) {
+        docElm.mozRequestFullScreen();
+    } else if (docElm.webkitRequestFullScreen) {
+        docElm.webkitRequestFullScreen();
+    }
+}
+
+
+/**
+ * 退出浏览器全屏
+ *
+ * @export:
+ * @param {type}
+ * @return {type}
+ */
+export function exitFullscreen() {
+    const d = window.parent.document;
+    if (d.exitFullscreen) {
+        d.exitFullscreen();
+    } else if (d.mozCancelFullScreen) {
+        d.mozCancelFullScreen(); //FireFox
+    } else if (d.webkitCancelFullScreen) {
+        d.webkitCancelFullScreen(); //Chrome等
+    } else if (d.msExitFullscreen) {
+        d.msExitFullscreen()
+    }
+}
+
+export function isFullscreen() {
+    return document.fullScreen ||
+        document.mozFullScreen ||
+        document.webkitIsFullScreen
 }

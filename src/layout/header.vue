@@ -6,28 +6,35 @@
 -->
 <template>
     <div class="header">
-        <div>前进后退</div>
-        <div>搜索</div>
-        <div>换肤</div>
-        <Theme />
+        <!-- 按钮组 -->
+        <div class="groups">
+            <!-- mac btn -->
+            <MacButton />
+            <!-- 路由记录 -->
+            <RouterHistory />
+        </div>
+
+        <!-- 换肤 -->
+        <el-popover placement="bottom" trigger="hover" width="200">
+            <Theme />
+            <Icon type="pifu" slot="reference" />
+        </el-popover>
     </div>
 </template>
 
 <script>
+import MacButton from "@/components/mac-button";
+import RouterHistory from "@/components/router-history";
 import Theme from "@/components/theme";
-//import x from ''
 
 export default {
-    components: { Theme },
+    components: { MacButton, RouterHistory, Theme },
     data() {
         return {};
     },
     computed: {},
-    mounted() {
-    },
-    methods: {
-
-    }
+    mounted() {},
+    methods: {}
 };
 </script>
 <style lang="scss" scoped>
@@ -35,9 +42,13 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 20px;
 
     height: $header-height;
     background-color: var(--header-bgcolor);
     padding-right: 36px;
+    .groups{
+        @include clo-center();
+    }
 }
 </style>
