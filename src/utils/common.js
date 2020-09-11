@@ -37,7 +37,12 @@ export function isDef(v) {
 function padLeftZero(str) {
     return ('00' + str).substr(str.length)
 }
-
+/**
+ * 时间格式化处理
+ * @export:
+ * @param {String} date
+ * @return {type}
+ */
 export function formatDate(date, fmt = 'yyyy-MM-dd hh:mm:ss') {
     date = date instanceof Date ? date : new Date(date)
     if (/(y+)/.test(fmt)) {
@@ -63,4 +68,16 @@ export function formatDate(date, fmt = 'yyyy-MM-dd hh:mm:ss') {
         }
     }
     return fmt
+}
+
+/**
+ * 单位处理
+ * @export:
+ * @param {Number} count
+ * @return {string} 单位处理
+ */
+export function countUnit(count) {
+    const countStr = count.toString();
+    const len = countStr.length;
+    return len > 5 ? countStr.slice(0, len - 5) + '万' : countStr;
 }
