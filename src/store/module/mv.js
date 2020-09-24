@@ -7,10 +7,9 @@ const getters = {
 
 const actions = {
     async getMvs({ commit }, params) {
-        console.log('params:', params);
-        const { data } = await request.get('/mv/all', { params })
-        commit('GET_MVS', data);
-        return data;
+        const res = await request.get('/mv/all', { params })
+        commit('GET_MVS', res.data);
+        return res;
     }
 }
 

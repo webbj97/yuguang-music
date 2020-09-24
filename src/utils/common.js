@@ -23,6 +23,13 @@ export function pad(num, n = 2) {
     return num;
 }
 
+/**
+ * 切换时间展示方式
+ *
+ * @export:
+ * @param {number} interval 传入秒
+ * @return {type} 返回 xx:xx 格式
+ */
 export function formatTime(interval) {
     interval = interval | 0;
     const minute = pad((interval / 60) | 0);
@@ -80,4 +87,14 @@ export function countUnit(count) {
     const countStr = count.toString();
     const len = countStr.length;
     return len > 5 ? countStr.slice(0, len - 5) + '万' : countStr;
+}
+
+export function getImgUrl(url, w, h) {
+    h = h ? h : w;
+    url = url += `?param=${w}y${h}`;
+    return url;
+}
+
+export function getPageOffset(page, limit) {
+    return (page - 1) * limit
 }

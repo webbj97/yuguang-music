@@ -49,3 +49,9 @@
     top: 0;
     right: 0;
 }
+
+@mixin round($d) {
+    width: $d;
+    height: $d;
+    border-radius: 50%;
+}

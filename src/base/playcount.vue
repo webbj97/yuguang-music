@@ -1,8 +1,14 @@
+<!--
+ * @desc:
+ * @Author: 余光
+ * @Email: webbj97@163.com
+ * @Date: 2020-09-11 15:40:39
+-->
 !<!-- 组件说明 -->
 <template>
     <div class="play-count">
         <Icon class="play-count__icon" type="bofang-line" :size="14" />
-        <span class="play-count__count">{{playCount}}</span>
+        <span class="play-count__count">{{ playCount }}</span>
     </div>
 </template>
 

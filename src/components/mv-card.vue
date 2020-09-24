@@ -1,14 +1,20 @@
+<!--
+ * @desc:
+ * @Author: 余光
+ * @Email: webbj97@163.com
+ * @Date: 2020-09-11 15:40:39
+-->
 !<!-- 组件说明 -->
 <template>
     <div class="mv-card" @click="onMoveMv()">
         <div class="img-wrap">
-            <img v-lazy="data.cover" alt="视频" />
+            <img v-lazy="imgCover" alt="视频" />
             <PlayIcon class="play-icon" />
-            <PlayCount class="play-count" :count="data.playCount" />
+            <PlayCount class="play-count" :count="playCount" />
             <span class="play-time">{{newDuration}}</span>
         </div>
-        <p class="name">{{data.name}}</p>
-        <p class="artist">by {{data.artistName}}</p>
+        <p class="name" v-if="name">{{ name }}</p>
+        <p class="artist" v-if="author">by {{ author }}</p>
     </div>
 </template>
 
@@ -16,26 +22,21 @@
 import { formatTime } from "@/utils";
 
 export default {
-    props: {
-        data: {
-            type: Object,
-            default: () => {}
-        }
-    },
+    props: ["imgCover", "duration", "id", "name", "author", "playCount"],
     components: {},
     data() {
         return {};
     },
     computed: {
         newDuration() {
-            const { duration } = this.data;
+            const { duration } = this;
             return formatTime(duration / 1000);
         }
     },
     mounted() {},
     methods: {
         onMoveMv() {
-            const { id } = this.data;
+            const { id } = this;
             this.$router.push(`/mv/${id}`);
         }
     }
@@ -45,7 +46,6 @@ export default {
 <style lang='scss' scoped>
 .mv-card {
     position: relative;
-    margin-bottom: 25px;
     min-width: 140px;
     cursor: pointer;
     .img-wrap {
@@ -75,13 +75,13 @@ export default {
     }
     .play-count {
         position: absolute;
-        top: 2px;
-        right: 4px;
+        top: 3px;
+        right: 5px;
     }
     .play-time {
         position: absolute;
         bottom: 2px;
-        right: 4px;
+        right: 5px;
         color: #fff;
     }
     &:hover .play-icon {

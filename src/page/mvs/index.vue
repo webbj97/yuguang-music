@@ -2,9 +2,8 @@
  * @desc:
  * @Author: 余光
  * @Email: webbj97@163.com
- * @Date: 2020-09-08 15:47:59
+ * @Date: 2020-09-11 15:40:39
 -->
-!<!-- 组件说明 -->
 <template>
     <div class="mvs">
         <div class="mvs__tabs">
@@ -19,7 +18,7 @@
                 >{{tab.name}}</span>
             </p>
             <p class="line">
-                <span class="title">地区：</span>
+                <span class="title">版本：</span>
                 <span
                     v-for="(tab,index) in typeTabs"
                     :key="index"
@@ -39,12 +38,27 @@
                 >{{tab.name}}</span>
             </p>
         </div>
-        <ul class="mvs__list">
+        <ul class="mvs__list" ref="mvlist">
             <li class="mv-item" v-for="mv in mvs" :key="mv.artistId">
-                <MvCard :data="mv"/>
+                <MvCard
+                    :author="mv.artistName"
+                    :duration="mv.duration"
+                    :id="mv.id"
+                    :imgCover="mv.cover"
+                    :name="mv.name"
+                    :playCount="mv.playCount"
+                />
             </li>
         </ul>
-        <div class="mvs__pags">分页</div>
+        <div class="mvs__pags">
+            <Pagination
+                :current-page.sync="currentPage"
+                :page-size="pageSize"
+                :total="total"
+                @current-change="onPageChange"
+                class="pagination"
+            />
+        </div>
     </div>
 </template>
 
@@ -52,6 +66,9 @@
 import { mapActions, mapGetters } from "vuex";
 import MvCard from "@/components/mv-card";
 import { Loading } from "element-ui";
+import { scrollInto } from "@/utils";
+
+const PAGE_SIZE = 24;
 
 export default {
     components: { MvCard },
@@ -78,73 +95,10 @@ export default {
                     name: "니가 없는데 (WITHOUT U) KBS音乐银行 17/03/24 现场版",
                     playCount: 3311,
                     subed: false
-                },
-                {
-                    artistId: 1074059,
-                    artistName: "ROMEO",
-                    id: 5469073,
-                    artists: [
-                        {
-                            id: 1074052,
-                            name: "ROMEO"
-                        }
-                    ],
-                    transNames: ["로미오"],
-                    briefDesc: null,
-                    cover:
-                        "http://p1.music.126.net/AW31RhAos_SJ_PHJl34Efw==/19212866183795417.jpg",
-                    desc: null,
-                    duration: 189000,
-                    mark: 0,
-                    name: "니가 없는데 (WITHOUT U) KBS音乐银行 17/03/24 现场版",
-                    playCount: 3311,
-                    subed: false
-                },
-                {
-                    artistId: 1074050,
-                    artistName: "ROMEO",
-                    id: 5469073,
-                    artists: [
-                        {
-                            id: 1074052,
-                            name: "ROMEO"
-                        }
-                    ],
-                    transNames: ["로미오"],
-                    briefDesc: null,
-                    cover:
-                        "http://p1.music.126.net/AW31RhAos_SJ_PHJl34Efw==/19212866183795417.jpg",
-                    desc: null,
-                    duration: 189000,
-                    mark: 0,
-                    name: "니가 없는데 (WITHOUT U) KBS音乐银行 17/03/24 现场版",
-                    playCount: 3311,
-                    subed: false
-                },
-                {
-                    artistId: 1074053,
-                    artistName: "ROMEO",
-                    id: 5469073,
-                    artists: [
-                        {
-                            id: 1074052,
-                            name: "ROMEO"
-                        }
-                    ],
-                    transNames: ["로미오"],
-                    briefDesc: null,
-                    cover:
-                        "http://p1.music.126.net/AW31RhAos_SJ_PHJl34Efw==/19212866183795417.jpg",
-                    desc: null,
-                    duration: 189000,
-                    mark: 0,
-                    name: "니가 없는데 (WITHOUT U) KBS音乐银行 17/03/24 现场版",
-                    playCount: 3311,
-                    subed: false
                 }
             ],
             areaTabs: [
-                { name: "全部", value: "" },
+                { name: "全部", value: "全部" },
                 { name: "内地", value: "内地" },
                 { name: "港台", value: "港台" },
                 { name: "欧美", value: "欧美" },
@@ -152,25 +106,26 @@ export default {
                 { name: "韩国", value: "韩国" }
             ],
             typeTabs: [
-                { name: "全部", value: "" },
+                { name: "全部", value: "全部" },
                 { name: "官方版", value: "官方版" },
                 { name: "原生", value: "原生" },
                 { name: "现场版", value: "现场版" },
                 { name: "网易出品", value: "网易出品" }
             ],
             orderTabs: [
-                { name: "全部", value: "" },
+                { name: "全部", value: "全部" },
                 { name: "上升最快", value: "上升最快" },
                 { name: "最热", value: "最热" },
                 { name: "最新", value: "最新" }
             ],
-            areaCurrent: "",
-            typeCurrent: "",
-            orderCurrent: ""
+            areaCurrent: "全部",
+            typeCurrent: "全部",
+            orderCurrent: "全部",
+            pageSize: PAGE_SIZE,
+            currentPage: 1,
+            total: 0
         };
     },
-    computed: {},
-    watch: {},
     mounted() {
         this.init();
     },
@@ -181,16 +136,25 @@ export default {
                 target: ".mvs__list",
                 text: "加载中"
             });
-            const { areaCurrent, typeCurrent, orderCurrent } = this;
+            const {
+                areaCurrent,
+                typeCurrent,
+                orderCurrent,
+                pageSize,
+                currentPage
+            } = this;
             const params = {
                 area: areaCurrent,
                 type: typeCurrent,
                 order: orderCurrent,
-                limit: 1
+                limit: pageSize || 12,
+                offset: (currentPage - 1) * pageSize
             };
-            const mvs = await this.getMvs(params);
-            // this.mvs = mvs;
-            console.log("mvs:", mvs[0]);
+            const { data, count } = await this.getMvs(params);
+            console.log("data:", data);
+            console.log("count:", count);
+            this.mvs = data;
+            this.total = count || this.total;
             loadingInstance.close();
         },
         // 分类
@@ -213,19 +177,24 @@ export default {
                     return;
             }
         },
+        // 分页
+        async onPageChange() {
+            await this.init();
+            this.$nextTick(() => {
+                scrollInto(this.$refs.mvlist);
+            });
+        }
     }
 };
 </script>
 
 <style lang='scss' scoped>
 .mvs {
-    border: 1px solid red;
     &__tabs {
         padding: 20px;
-        font-size: 16px;
-        border: 1px solid black;
+        font-size: 14px;
         .line {
-            line-height: 40px;
+            line-height: 50px;
         }
         .title {
             width: 100px;
@@ -233,18 +202,16 @@ export default {
         }
         .tab {
             display: inline-block;
-            margin-left: 20px;
-            width: 90px;
-            height: 36px;
-            border: 1px solid #ddd;
+            margin-left: 15px;
+            width: 84px;
+            height: 34px;
             text-align: center;
-            line-height: 36px;
+            line-height: 34px;
             border-radius: 18px;
             cursor: pointer;
             &.current {
-                background: $theme-color;
-                color: #fff;
-                border: 0;
+                color: $music-color;
+                background: #fCf6f6;
             }
         }
     }
@@ -255,9 +222,13 @@ export default {
         padding: 20px;
         min-height: 400px;
         .mv-item {
+            margin-bottom: 35px;
             width: 25%;
             padding: 0 12px;
         }
+    }
+    &__pags{
+        line-height: 40px;
     }
 }
 </style>
