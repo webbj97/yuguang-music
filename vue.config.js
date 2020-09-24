@@ -5,6 +5,8 @@
  * @Date: 2020-08-03 11:14:43
  */
 
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = {
   css: {
     loaderOptions: {
@@ -16,4 +18,5 @@ module.exports = {
       },
     },
   },
+  publicPath: isProd ? '/yuguang-music/' : '/'
 }
