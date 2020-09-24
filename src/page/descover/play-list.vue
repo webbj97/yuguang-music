@@ -108,13 +108,13 @@ export default {
     },
     computed: {},
     mounted() {
-        // this.init();
+        this.init();
     },
     methods: {
         async init() {
             const { result } = await getPersonalized({ limit: 10 });
-            // this.playlist = result;
-            console.log("result:", result);
+            this.playlist = result;
+            // console.log("result:", result);
         }
     }
 };

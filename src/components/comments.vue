@@ -2,7 +2,7 @@
 <template>
     <div class="comments">
         <div class="list" v-if="hasHotComments">
-            <p class="title">热门</p>
+            <p class="title">热门评论</p>
             <Comment
                 class="list__comment"
                 :comment="comment"
@@ -12,7 +12,7 @@
         </div>
         <div class="list" v-if="hasComments">
             <p class="title" ref="commentTitle">
-                最新
+                最新评论
                 <span class="total">({{ total }})</span>
             </p>
             <Comment

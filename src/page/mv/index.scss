@@ -5,9 +5,16 @@
 
     // 大标题
     .title {
+        display: flex;
+        align-items: center;
         font-size: 20px;
         font-weight: 500;
-        margin: 10px 0;
+        margin: 20px 0;
+        i{
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
     }
 
     // 左栏

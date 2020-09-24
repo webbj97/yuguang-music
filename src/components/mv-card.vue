@@ -11,7 +11,7 @@
             <img v-lazy="imgCover" alt="视频" />
             <PlayIcon class="play-icon" />
             <PlayCount class="play-count" :count="playCount" />
-            <span class="play-time">{{newDuration}}</span>
+            <span class="play-time" v-if="duration">{{newDuration}}</span>
         </div>
         <p class="name" v-if="name">{{ name }}</p>
         <p class="artist" v-if="author">by {{ author }}</p>

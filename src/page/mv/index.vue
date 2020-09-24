@@ -8,7 +8,7 @@
 <template>
     <div class="mv-details">
         <div class="left">
-            <div class="title" @click="onMoveMvs">详情</div>
+            <div class="title" @click="onMoveMvs"><Icon :size="12" type="houtui" />返回列表</div>
 
             <div class="player">
                 <VideoPlayer class="video" :url="mvPlayInfo.url" ref="video" />

@@ -1,9 +1,15 @@
+<!--
+ * @desc:
+ * @Author: 余光
+ * @Email: webbj97@163.com
+ * @Date: 2020-08-31 09:42:27
+-->
 !<!-- 组件说明 -->
 <template>
-    <el-carousel class="banner-carousel" type="card" :interval="4000" height="200px">
+    <el-carousel class="banner-carousel" type="card" :interval="4000">
         <el-carousel-item v-for="item in banners" :key="item.targetId">
             <a class="banner-carousel__item" :href="item.url">
-                <img :src="item.imageUrl" alt="轮播" />
+                <img :src="getImgUrl(item.imageUrl, 1000, 400)" alt="轮播" />
             </a>
         </el-carousel-item>
     </el-carousel>
@@ -11,6 +17,7 @@
 
 <script>
 import { getBanner } from "@/api";
+import { getImgUrl } from "@/utils";
 
 export default {
     components: {},
@@ -55,6 +62,7 @@ export default {
         // this.init();
     },
     methods: {
+        getImgUrl,
         async init() {
             const { banners } = await getBanner();
             this.banners = banners;

@@ -30,9 +30,7 @@
 
         <!-- 操作 -->
         <div class="bottom-player__groups">
-            <div>1</div>
-
-            <Icon :size="20" type="playlist" @click="togglePlayListShow" />
+            <!-- <Icon :size="20" type="playlist" @click="togglePlayListShow" /> -->
 
             <el-popover placement="top" trigger="hover" width="160">
                 <p>{{ playModeText }}</p>
@@ -256,8 +254,6 @@ export default {
         min-width: 300px;
     }
     .icon {
-        width: 20px;
-        height: 20px;
         color: #c4463a;
     }
 }

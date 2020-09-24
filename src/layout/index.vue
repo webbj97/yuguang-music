@@ -13,7 +13,7 @@
                 <LayoutMenu />
             </div>
             <div class="content" id="page-content">
-                <router-view />
+                <router-view :class="routerViewCls" />
             </div>
         </div>
     </div>
@@ -22,13 +22,22 @@
 <script>
 import LayoutHeader from "./header";
 import LayoutMenu from "./menu";
+import { layoutCenterNames } from "@/router.js"
+
+console.log('layoutCenterNames:', layoutCenterNames);
 
 export default {
     components: { LayoutHeader, LayoutMenu },
     data() {
         return {};
     },
-    computed: {},
+    computed: {
+        routerViewCls() {
+            return layoutCenterNames.find(name => name === this.$route.name)
+                ? "router-view-center"
+                : "";
+        }
+    },
     methods: {},
     mounted() {}
 };

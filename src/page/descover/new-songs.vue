@@ -3,17 +3,33 @@
     <div class="new-songs">
         <YgTitle>最新音乐</YgTitle>
         <div class="new-songs__content">
-            <NewSongCard v-for="item in newSongs" :key="item.id" :data="onInitSong(item)" />
+            <div class="list">
+                <PlaySongCard
+                    v-for="(item, index) in songLeft"
+                    :key="item.id"
+                    :data="onInitSong(item)"
+                    :order="getOrder(index, type='left')"
+                />
+            </div>
+            <div class="list">
+                <PlaySongCard
+                    v-for="(item, index) in songRight"
+                    :key="item.id"
+                    :data="onInitSong(item)"
+                    :order="getOrder(index, type='right')"
+                />
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import NewSongCard from "@/components/play-song-card";
+import PlaySongCard from "@/components/play-song-card";
 import { getNewSongs } from "@/api";
+import { pad } from "@/utils";
 
 export default {
-    components: { NewSongCard },
+    components: { PlaySongCard },
     data() {
         return {
             newSongs: [
@@ -69,27 +85,31 @@ export default {
                     },
                     type: 4
                 }
-            ]
+            ],
+            songLeft: [],
+            songRight: []
         };
     },
     computed: {},
     mounted() {
-        // this.init();
-        this.onInitSong(this.newSongs[0]);
+        this.init();
     },
     methods: {
         async init() {
             const { result } = await getNewSongs();
-            this.newSongs = result;
+            // this.newSongs = result;
             console.log("result:", result);
+            this.songLeft = result.slice(0, 5);
+            this.songRight = result.slice(5);
         },
-        onInitSong(data) {
+        onInitSong(item) {
             const {
                 id,
                 name,
                 picUrl,
                 song: { artists }
-            } = data;
+            } = item;
+
             const artistsText = (artists || [])
                 .map(({ name }) => name)
                 .join("/");
@@ -99,18 +119,29 @@ export default {
                 picUrl,
                 artistsText
             };
+        },
+        getOrder(index, type) {
+            const order = type === "right" ? index + 6 : index + 1;
+            return String(pad(order));
         }
     }
 };
 </script>
 
 <style lang='scss' scoped>
-.new-songs{
+.new-songs {
     margin-top: 30px;
-    &__content{
+    &__content {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+    .list {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
     }
 }
 </style>
