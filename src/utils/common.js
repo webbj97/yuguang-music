@@ -44,7 +44,12 @@ export function isDef(v) {
 function padLeftZero(str) {
     return ('00' + str).substr(str.length)
 }
-
+/**
+ * 时间格式化处理
+ * @export:
+ * @param {String} date
+ * @return {type}
+ */
 export function formatDate(date, fmt = 'yyyy-MM-dd hh:mm:ss') {
     date = date instanceof Date ? date : new Date(date)
     if (/(y+)/.test(fmt)) {
@@ -73,48 +78,23 @@ export function formatDate(date, fmt = 'yyyy-MM-dd hh:mm:ss') {
 }
 
 /**
- * 全屏
- *
+ * 单位处理
  * @export:
- * @param {type}
- * @return {type}
+ * @param {Number} count
+ * @return {string} 单位处理
  */
-export function requestFullScreen(element) {
-    const docElm = element;
-    if (docElm.requestFullscreen) {
-        docElm.requestFullscreen();
-    } else if (docElm.msRequestFullscreen) {
-        docElm.msRequestFullscreen();
-    } else if (docElm.mozRequestFullScreen) {
-        docElm.mozRequestFullScreen();
-    } else if (docElm.webkitRequestFullScreen) {
-        docElm.webkitRequestFullScreen();
-    }
+export function countUnit(count) {
+    const countStr = count.toString();
+    const len = countStr.length;
+    return len > 5 ? countStr.slice(0, len - 5) + '万' : countStr;
 }
 
-
-/**
- * 退出浏览器全屏
- *
- * @export:
- * @param {type}
- * @return {type}
- */
-export function exitFullscreen() {
-    const d = window.parent.document;
-    if (d.exitFullscreen) {
-        d.exitFullscreen();
-    } else if (d.mozCancelFullScreen) {
-        d.mozCancelFullScreen(); //FireFox
-    } else if (d.webkitCancelFullScreen) {
-        d.webkitCancelFullScreen(); //Chrome等
-    } else if (d.msExitFullscreen) {
-        d.msExitFullscreen()
-    }
+export function getImgUrl(url, w, h) {
+    h = h ? h : w;
+    url = url += `?param=${w}y${h}`;
+    return url;
 }
 
-export function isFullscreen() {
-    return document.fullScreen ||
-        document.mozFullScreen ||
-        document.webkitIsFullScreen
+export function getPageOffset(page, limit) {
+    return (page - 1) * limit
 }

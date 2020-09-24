@@ -9,7 +9,8 @@ import Router from 'vue-router'
 
 const Discover = () => import('@/page/descover'); // 发现页面
 const PlaylistDetails = () => import('@/page/playlist-details'); // 发现页面
-const Songs = () => import( /* webpackChunkName: "Songs" */ '@/page/songs'); // 音乐
+const Mvs = () => import( /* webpackChunkName: "Songs" */ '@/page/mvs'); // 最新视频
+const Mv = () => import( /* webpackChunkName: "Songs" */ '@/page/mv'); // 视频详情
 
 export const menuList = [{
         path: '/discover',
@@ -21,12 +22,12 @@ export const menuList = [{
         },
     },
     {
-        title: '测试',
-        path: '/songs',
-        name: 'Songs',
-        component: Songs,
+        title: '最新视频',
+        path: '/mvs',
+        name: 'Mvs',
+        component: Mvs,
         meta: {
-            title: '视频',
+            title: '最新视频',
             icon: 'ziyuan',
         },
     },
@@ -45,6 +46,12 @@ export default new Router({
             name: 'playlist',
             component: PlaylistDetails,
         },
+        {
+            path: '/mv/:id',
+            name: 'mv',
+            component: Mv,
+            props: (route) =>  ({id: +route.params.id}),
+          },
         ...menuList,
     ],
 })

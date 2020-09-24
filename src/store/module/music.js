@@ -4,7 +4,6 @@
  * @Email: webbj97@163.com
  * @Date: 2020-09-01 16:14:31
  */
-import storage from 'good-storage'
 import { PLAY_HISTORY_KEY, getSongImg, playModeMap } from '@/utils'
 import { SET_CURRENT_SONG, SET_PLAY_STATE, SET_CURRENT_TIME, SET_PLAY_LIST, SET_PLAY_MODE, SET_PLAY_LIST_SHOW } from '../type.js'
 

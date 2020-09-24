@@ -83,7 +83,9 @@ export default {
 .icon-component {
     cursor: pointer;
 }
-
+.icon-bofang{
+    margin-left: 10%;
+}
 .icon-color {
     // 通过prop传入这几个字段
     // 可以使用默认的几个颜色
