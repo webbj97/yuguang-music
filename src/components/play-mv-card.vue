@@ -8,7 +8,7 @@
 <template>
     <div class="play-mv-card">
         <div class="img-wrap">
-            <img class="img-wrap__img" v-lazy="data.picUrl" alt="推荐歌单" />
+            <img v-lazy="data.picUrl" alt="推荐歌单" />
             <div class="img-wrap__desc" v-if="data.copywriter">{{ data.copywriter }}</div>
             <Icon type="bofang" />
         </div>
@@ -41,13 +41,13 @@ export default {
     width: calc(25% - 15px); // 宽度
     .img-wrap {
         position: relative;
-        width: 100%;
-        margin-bottom: 8px;
-        border-radius: 4px;
+        padding-top: 56%;
         overflow: hidden;
-        &__img {
+        img {
+            @include abs-stretch();
             width: 100%;
-            height: auto;
+            height: 100%;
+            border-radius: 4px;
         }
         &__desc {
             position: absolute;

@@ -14,7 +14,7 @@ const Mv = () => import( /* webpackChunkName: "Songs" */ '@/page/mv'); // 视频
 
 export const menuList = [{
         path: '/discover',
-        name: 'Discover',
+        name: 'discover',
         component: Discover,
         meta: {
             title: '发现音乐',
@@ -22,9 +22,8 @@ export const menuList = [{
         },
     },
     {
-        title: '最新视频',
         path: '/mvs',
-        name: 'Mvs',
+        name: 'mvs',
         component: Mvs,
         meta: {
             title: '最新视频',
@@ -32,6 +31,8 @@ export const menuList = [{
         },
     },
 ]
+
+export const layoutCenterNames = ['discover', 'playlists', 'songs', 'mvs']
 
 Vue.use(Router)
 

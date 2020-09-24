@@ -39,7 +39,7 @@ export default {
 
 <style lang='scss' scoped>
 .play-icon {
-    background: rgba(210, 210, 210, 0.5);
+    background: rgba(255, 255, 255, 0.5);
     @include flex-center();
     &__icon{
         color: $theme-color;

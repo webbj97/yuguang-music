@@ -1,19 +1,26 @@
 !<!-- 组件说明 -->
 <template>
     <div class="play-mv">
-        <YgTitle>内容标题3</YgTitle>
+        <YgTitle>推荐MV</YgTitle>
         <div class="play-mv__content">
-            <PlayMvCard v-for="item in playMv" :key="item.id" :data="item" />
+            <MvCard
+                class="mv-card"
+                v-for="item in playMv"
+                :key="item.id"
+                :id="item.id"
+                :imgCover="item.picUrl"
+                :playCount="item.playCount"
+            />
         </div>
     </div>
 </template>
 
 <script>
-import PlayMvCard from "@/components/play-mv-card";
+import MvCard from "@/components/mv-card";
 import { getPersonalizedMv } from "@/api";
 export default {
     name: "PlatMv",
-    components: { PlayMvCard },
+    components: { MvCard },
     data() {
         return {
             playMv: [
@@ -33,7 +40,8 @@ export default {
                     playCount: 1995,
                     subed: false,
                     trackNumberUpdateTime: null,
-                    type: 5
+                    type: 5,
+                    duration: 252000,
                 },
                 {
                     alg: "featured",
@@ -69,7 +77,8 @@ export default {
                     playCount: 1995,
                     subed: false,
                     trackNumberUpdateTime: null,
-                    type: 5
+                    type: 5,
+                    duration: 252000,
                 },
                 {
                     alg: "featured",
@@ -87,19 +96,20 @@ export default {
                     playCount: 1744,
                     subed: false,
                     trackNumberUpdateTime: null,
-                    type: 5
+                    type: 5,
                 }
             ]
         };
     },
     computed: {},
     mounted() {
-        // this.init();
+        this.init();
     },
     methods: {
         async init() {
             const { result } = await getPersonalizedMv();
             this.playMv = result;
+            console.log('resuresultresultlt:', result);
         }
     }
 };
@@ -111,6 +121,9 @@ export default {
     &__content {
         display: flex;
         justify-content: space-between;
+    }
+    .mv-card{
+        width: calc(25% - 16px); // 宽度
     }
 }
 </style>

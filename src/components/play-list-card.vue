@@ -51,7 +51,7 @@ export default {
 .play-list-card {
     display: flex;
     flex-direction: column;
-    width: calc(20% - 8px); // 宽度
+    width: calc(20% - 16px); // 宽度
     margin-bottom: 30px;
     cursor: pointer;
     .img-wrap {
@@ -75,7 +75,7 @@ export default {
             top: 0;
             left: 0;
             width: 100%;
-            padding: 10px;
+            padding: 4px 10px;
             background: rgba(0, 0, 0, 0.1);
             font-size: 14px;
             color: #fff;
@@ -108,6 +108,9 @@ export default {
         }
     }
     &__name {
+        line-height: 18px;
+        color: var(--font-color-white);
+        @include ellipsis-more(2);
     }
 }
 </style>

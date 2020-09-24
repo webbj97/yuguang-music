@@ -221,6 +221,7 @@ export default {
         justify-content: space-between;
         padding: 20px;
         min-height: 400px;
+        margin: 0 -12px;
         .mv-item {
             margin-bottom: 35px;
             width: 25%;
