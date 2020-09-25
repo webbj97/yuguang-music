@@ -116,6 +116,7 @@ const actions = {
     },
     // 存储播放列表
     setPlayList({ commit }, playList) {
+        console.log('playList:', playList);
         commit('SET_PLAY_LIST', playList);
     },
     // 设置播放模式

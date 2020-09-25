@@ -10,6 +10,8 @@
                 :id="item.id"
                 :imgCover="item.picUrl"
                 :playCount="item.playCount"
+                :name="item.name"
+                :author="item.artistName"
             />
         </div>
     </div>
@@ -109,7 +111,7 @@ export default {
         async init() {
             const { result } = await getPersonalizedMv();
             this.playMv = result;
-            console.log('resuresultresultlt:', result);
+            console.log('this.playMv:', result);
         }
     }
 };

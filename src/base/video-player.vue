@@ -38,7 +38,6 @@ export default {
     },
     methods: {
         initPlayer() {
-            console.log('this.url:', this.url);
             if (!this.url) return;
             this.player = new Player({
                 el: this.$refs.player,

@@ -41,6 +41,7 @@ export default {
     methods: {
         // 歌单详情
         onMoveList({ id }) {
+            console.log("1:", 1);
             this.$router.push(`/playlist/${id}`);
         }
     }
@@ -77,12 +78,12 @@ export default {
             width: 100%;
             padding: 4px 10px;
             background: rgba(0, 0, 0, 0.1);
-            font-size: 14px;
-            color: #fff;
+            color: $white;
+            font-size: $font-size-sm;
             transform: translate(0, -100%);
             transition: all 0.2s;
         }
-        &__icon{
+        &__icon {
             position: absolute;
             right: 10px;
             bottom: 10px;
@@ -90,16 +91,16 @@ export default {
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.5);
+            background: rgba(255, 255, 255, 0.5);
             opacity: 0;
-            transition: .2s opacity;
-            i{
+            transition: 0.2s opacity;
+            i {
                 font-style: 12px;
                 color: $music-color;
             }
         }
         &:hover {
-            .img-wrap__icon{
+            .img-wrap__icon {
                 opacity: 1;
             }
             .img-wrap__desc {

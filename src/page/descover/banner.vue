@@ -7,7 +7,7 @@
 !<!-- 组件说明 -->
 <template>
     <el-carousel class="banner-carousel" type="card" :interval="4000">
-        <el-carousel-item v-for="item in banners" :key="item.targetId">
+        <el-carousel-item v-for="(item,index) in banners" :key="index">
             <a class="banner-carousel__item" :href="item.url">
                 <img :src="getImgUrl(item.imageUrl, 1000, 400)" alt="轮播" />
             </a>
@@ -59,7 +59,7 @@ export default {
     },
     computed: {},
     mounted() {
-        // this.init();
+        this.init();
     },
     methods: {
         getImgUrl,
