@@ -17,7 +17,7 @@
         <!-- 换肤 -->
         <el-popover placement="bottom" trigger="hover" width="200">
             <Theme />
-            <Icon type="pifu" slot="reference" />
+            <Icon class="pifu" type="pifu" slot="reference" />
         </el-popover>
     </div>
 </template>
@@ -49,6 +49,9 @@ export default {
     padding-right: 36px;
     .groups{
         @include clo-center();
+    }
+    .pifu{
+        color: var(--font-color-white);
     }
 }
 </style>

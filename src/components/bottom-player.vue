@@ -203,7 +203,6 @@ export default {
 
 <style lang='scss' scoped>
 .bottom-player {
-    position: relative;
     position: fixed;
     z-index: $mini-player-z-index;
     bottom: 0;
@@ -216,11 +215,11 @@ export default {
     padding: 8px 16px;
     padding-right: 24px;
     background: var(--body-bgcolor);
-    box-shadow: 1px -1px 1px #ddd;
     &__info {
         display: flex;
         align-items: center;
         min-width: 300px;
+        color: var(--font-color-white);
         .img-wrap {
             @include img-wrap(40px);
             margin-right: 8px;

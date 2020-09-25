@@ -54,6 +54,8 @@ export default {
 
 <style lang='scss' scoped>
 .song-table {
+    margin-top: 40px;
+    cursor: default;
     .song-data {
         display: flex;
         align-items: center;
