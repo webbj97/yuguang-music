@@ -12,7 +12,7 @@
             <div class="info__creator">
                 <img class="avatar" v-lazy="creator.avatarUrl" alt="头像" />
                 <span class="nickname">{{creator.nickname}}</span>
-                <span>{{createTime}}创建</span>
+                <span class="time">{{createTime}}创建</span>
             </div>
             <div class="details">
                 <span class="details__title">标签：</span>
@@ -96,12 +96,12 @@ export default {
             align-items: center;
             margin-top: 15px;
             margin-bottom: 20px;
+            color: var(--font-color-white);
             .avatar {
                 margin-right: 5px;
                 width: 28px;
                 height: 28px;
                 border-radius: 50%;
-                color: var(--font-color-white);
             }
             .nickname {
                 color: $blue;
