@@ -9,6 +9,7 @@
                     :key="item.id"
                     :data="onInitSong(item)"
                     :order="getOrder(index, type='left')"
+                    @click.native="onClickSong(index, type='left')"
                 />
             </div>
             <div class="list">
@@ -17,6 +18,7 @@
                     :key="item.id"
                     :data="onInitSong(item)"
                     :order="getOrder(index, type='right')"
+                    @click.native="onClickSong(index, type='right')"
                 />
             </div>
         </div>
@@ -25,8 +27,9 @@
 
 <script>
 import PlaySongCard from "@/components/play-song-card";
+import { mapActions, mapGetters } from "vuex";
 import { getNewSongs } from "@/api";
-import { pad } from "@/utils";
+import { pad, createSong } from "@/utils";
 
 export default {
     components: { PlaySongCard },
@@ -95,12 +98,13 @@ export default {
         this.init();
     },
     methods: {
+        ...mapActions("music", ["startSong", "setPlayList"]),
         async init() {
             const { result } = await getNewSongs();
-            // this.newSongs = result;
-            console.log("result:", result);
-            this.songLeft = result.slice(0, 5);
-            this.songRight = result.slice(5);
+
+            const midIndex = parseInt(result.length / 2);
+            this.songLeft = result.slice(0, midIndex);
+            this.songRight = result.slice(midIndex);
         },
         onInitSong(item) {
             const {
@@ -120,9 +124,43 @@ export default {
                 artistsText
             };
         },
+        // 添加序号
         getOrder(index, type) {
             const order = type === "right" ? index + 6 : index + 1;
             return String(pad(order));
+        },
+        nomalizeSong(song) {
+            const {
+                id,
+                name,
+                song: {
+                    mvid,
+                    artists,
+                    album: { blurPicUrl },
+                    duration
+                }
+            } = song;
+            return createSong({
+                id,
+                name,
+                img: blurPicUrl,
+                artists,
+                duration,
+                mvId: mvid
+            });
+        },
+        // 点击播放音乐
+        onClickSong(index, type) {
+            const { songLeft, songRight } = this;
+            const songList = songLeft
+                .concat(songRight)
+                .map(item => this.nomalizeSong(item));
+
+            const idx = type === "left" ? index : index + 5;
+            const song = songList[idx];
+
+            this.startSong(song);
+            this.setPlayList(songList);
         }
     }
 };

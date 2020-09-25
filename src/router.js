@@ -32,7 +32,7 @@ export const menuList = [{
     },
 ]
 
-export const layoutCenterNames = ['discover', 'playlists', 'songs', 'mvs']
+export const layoutCenterNames = ['discover', 'playlist', 'songs', 'mvs']
 
 Vue.use(Router)
 

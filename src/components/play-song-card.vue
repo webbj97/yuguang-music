@@ -12,12 +12,10 @@
                 <img v-lazy="data.picUrl" alt="音乐" />
                 <PlayIcon class="play-icon" />
             </div>
+            <div class="order">{{order}}</div>
             <div class="info">
-                <span class="order">{{order}}</span>
-                <div>
-                    <p class="info__name">{{data.name}}</p>
-                    <p class="info__author">{{data.artistsText}}</p>
-                </div>
+                <p class="info__name">{{data.name}}</p>
+                <p class="info__author">{{data.artistsText}}</p>
             </div>
         </div>
     </div>
@@ -53,6 +51,7 @@ export default {
         align-items: center;
         .img {
             position: relative;
+            margin-right: 20px;
             @include img-wrap(90px);
             img {
                 border-radius: 4px;
@@ -62,22 +61,21 @@ export default {
             @include abs-center();
         }
         .info {
-            margin-left: 20px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            justify-content: space-around;
             color: var(--font-color-white);
-            &__name{
-                font-size: 16px;
-                font-weight: 500;
-                line-height: 30px;
+            flex: 1;
+            overflow: hidden;
+            &__name {
                 @include ellipsis();
             }
-            &__author{
+            &__author {
                 font-size: 12px;
                 line-height: 20px;
             }
         }
-        .order{
+        .order {
             margin-right: 20px;
             color: #515151;
         }

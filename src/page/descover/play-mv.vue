@@ -10,6 +10,8 @@
                 :id="item.id"
                 :imgCover="item.picUrl"
                 :playCount="item.playCount"
+                :name="item.name"
+                :author="item.artistName"
             />
         </div>
     </div>
@@ -103,7 +105,7 @@ export default {
     },
     computed: {},
     mounted() {
-        this.init();
+        // this.init();
     },
     methods: {
         async init() {

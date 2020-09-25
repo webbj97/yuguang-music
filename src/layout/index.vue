@@ -24,8 +24,6 @@ import LayoutHeader from "./header";
 import LayoutMenu from "./menu";
 import { layoutCenterNames } from "@/router.js"
 
-console.log('layoutCenterNames:', layoutCenterNames);
-
 export default {
     components: { LayoutHeader, LayoutMenu },
     data() {
