@@ -1,3 +1,9 @@
+<!--
+ * @desc:
+ * @Author: 余光
+ * @Email: webbj97@163.com
+ * @Date: 2020-09-11 15:40:42
+-->
 !<!-- 组件说明 -->
 <template>
     <div class="router-history">
@@ -43,6 +49,9 @@ export default {
         margin-right: 10px;
         &:hover{
             background: rgba(218, 206, 206, 0.3);
+        }
+        i{
+            color: var(--font-color-white);
         }
     }
 }

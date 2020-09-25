@@ -39,7 +39,7 @@
             </p>
         </div>
         <ul class="mvs__list" ref="mvlist">
-            <li class="mv-item" v-for="mv in mvs" :key="mv.artistId">
+            <li class="mv-item" v-for="(mv,index) in mvs" :key="mv.id">
                 <MvCard
                     :author="mv.artistName"
                     :duration="mv.duration"
@@ -151,8 +151,7 @@ export default {
                 offset: (currentPage - 1) * pageSize
             };
             const { data, count } = await this.getMvs(params);
-            console.log("data:", data);
-            console.log("count:", count);
+
             this.mvs = data;
             this.total = count || this.total;
             loadingInstance.close();
@@ -194,7 +193,8 @@ export default {
         padding: 20px;
         font-size: 14px;
         .line {
-            line-height: 50px;
+            color: var(--font-color-white);
+            line-height: 40px;
         }
         .title {
             width: 100px;
@@ -202,7 +202,7 @@ export default {
         }
         .tab {
             display: inline-block;
-            margin-left: 15px;
+            margin-left: 10px;
             width: 84px;
             height: 34px;
             text-align: center;

@@ -90,6 +90,6 @@ export default {
 
 <style lang='scss' scoped>
 .discover {
-    padding: 18px 32px;
+    padding: 25px 32px;
 }
 </style>

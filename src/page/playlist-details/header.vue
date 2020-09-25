@@ -12,28 +12,28 @@
             <div class="info__creator">
                 <img class="avatar" v-lazy="creator.avatarUrl" alt="头像" />
                 <span class="nickname">{{creator.nickname}}</span>
-                <span class="create">{{createTime}}创建</span>
+                <span class="time">{{createTime}}创建</span>
             </div>
             <div class="details">
-                标签：
-                <span href="javascript:void(0)" v-for="tag in playlist.tags" :key="tag">{{tag}}</span>
+                <span class="details__title">标签：</span>
+                <span class="details__content" href="javascript:void(0)" v-for="tag in playlist.tags" :key="tag">{{tag}}</span>
             </div>
             <div class="details">
                 <span class="details__title">歌曲数：</span>
-                {{playlist.trackCount}}
+                <span class="details__content">{{playlist.trackCount}}</span>
                 <span class="details__title">播放量：</span>
-                {{playlist.playCount}}
+                <span class="details__content">{{countUnit(playlist.playCount)}}</span>
             </div>
             <div class="details">
-                <span>简介：</span>
-                <p class="details__desc">{{playlist.description}}</p>
+                <span class="details__title">简介：</span>
+                <p class="details__content">{{playlist.description}}</p>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { formatDate } from "@/utils";
+import { formatDate, countUnit } from "@/utils";
 
 export default {
     name: "DetailsHeader",
@@ -58,7 +58,8 @@ export default {
     },
     mounted() {},
     methods: {
-        formatDate
+        formatDate,
+        countUnit
     }
 };
 </script>
@@ -66,19 +67,19 @@ export default {
 <style lang='scss' scoped>
 .data-details-header {
     display: flex;
-    justify-content: space-between;
-    img {
-        width: 100%;
-    }
     .img-wrap {
-        @include img-wrap(160px);
+        @include img-wrap(200px);
         margin-right: 20px;
+        img {
+            border-radius: 4px;
+        }
     }
     .info {
         &__name {
             display: flex;
             align-items: center;
             .type {
+                margin-right: 10px;
                 padding: 2px 6px;
                 border: 1px solid $music-color;
                 color: $music-color;
@@ -86,35 +87,39 @@ export default {
                 font-size: 14px;
             }
             .name {
-                font-size: 24px;
-                font-weight: 500;
+                font-size: 26px;
+                color: var(--font-color-white);
             }
         }
         &__creator {
             display: flex;
             align-items: center;
-            font-size: 18px;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            color: var(--font-color-white);
             .avatar {
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
                 margin-right: 5px;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
             }
-            .nickname{
-                color: blue;
-            }
-            .create{
-                color: #ccc;
+            .nickname {
+                color: $blue;
+                margin-right: 5px;
             }
         }
     }
     .details {
-        color: rgb(112, 109, 109);
+        display: flex;
+
         font-size: 14px;
+        margin-bottom: 10px;
         &__title {
-            color: #ccc;
+            color: var(--font-color-white);
         }
-        &__desc {
+        &__content {
+            margin-right: 15px;
+            color: rgb(112, 109, 109);
             @include ellipsis-more(2);
         }
     }

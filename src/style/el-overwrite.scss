@@ -63,3 +63,13 @@
         @include el-td-style(var(--stripe-bg));
     }
 }
+
+.el-pagination{
+    button{
+        background: transparent!important;
+    }
+    .el-pager li{
+        background: transparent!important;
+        color: var(--font-color-white);
+    }
+}

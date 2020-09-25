@@ -70,8 +70,7 @@ export default {
         async init() {
             const { id } = this;
             const { playlist } = await getListDetail({ id });
-            // this.playlist = playlist;
-            console.log('playlist:', playlist);
+            this.playlist = playlist;
             this.getSonglist(playlist);
         },
         // 获取歌单内歌曲

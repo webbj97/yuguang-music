@@ -61,6 +61,7 @@ export default {
     .name {
         margin-top: 5px;
         line-height: 22px;
+        color: var(--font-color-white);
         @include ellipsis();
     }
     .artist {
