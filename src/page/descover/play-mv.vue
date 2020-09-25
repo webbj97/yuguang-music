@@ -105,13 +105,13 @@ export default {
     },
     computed: {},
     mounted() {
-        // this.init();
+        this.init();
     },
     methods: {
         async init() {
             const { result } = await getPersonalizedMv();
             this.playMv = result;
-            console.log('resuresultresultlt:', result);
+            console.log('this.playMv:', result);
         }
     }
 };
