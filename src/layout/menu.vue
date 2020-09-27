@@ -61,6 +61,7 @@ export default {
         }
         .user-nick {
             font-size: 18px;
+            color: var(--font-color-white);
         }
     }
 

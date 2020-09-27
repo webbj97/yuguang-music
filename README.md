@@ -8,13 +8,15 @@
 
 
 ## Project setup
+
 ```
-npm install
+yarn install || npm install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
-npm run serve
+yarn dev || npm run dev
 ```
 
 ### Compiles and minifies for production
@@ -26,6 +28,13 @@ npm run build
 ```
 npm run lint
 ```
+
+### 技术栈
+
+语言：Vue、Sass
+接口：axios
+状态管理：Vuex
+组件：element
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
