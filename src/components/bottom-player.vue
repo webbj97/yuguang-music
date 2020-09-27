@@ -44,6 +44,10 @@
             </el-popover>
         </div>
 
+        <div class="progress-wrap">
+            <progressBar :disabled="false" :percent="playedPercent" @percentChange="percentChange" />
+        </div>
+
         <audio
             :src="currentSong.url"
             @canplay="onReady"
@@ -59,10 +63,10 @@ import { mapActions, mapGetters } from "vuex";
 import { formatTime, isDef, playModeMap } from "@/utils";
 
 export default {
-    components: { },
+    components: {},
     data() {
         return {
-            songReady: false,
+            songReady: false
         };
     },
     computed: {
@@ -92,6 +96,10 @@ export default {
         },
         modeIcon() {
             return this.currentMode.icon;
+        },
+        playedPercent() {
+            const { durationSecond } = this.currentSong;
+            return Math.min(this.currentTime / durationSecond, 1) || 0;
         }
     },
     watch: {
@@ -117,13 +125,15 @@ export default {
             this.timer = setTimeout(() => {
                 this.onPlay();
             }, 1000);
+
+            console.log('dasdasdad1:', 1);
         },
         playing(newPlaying) {
             console.log("play改变");
             this.$nextTick(() => {
                 newPlaying ? this.onPlay() : this.pause();
             });
-        }
+        },
     },
     mounted() {},
     methods: {
@@ -194,8 +204,14 @@ export default {
             this.setPlayMode(nextMode.code);
         },
         // 播放列表
-        togglePlayListShow(){
-            this.setPlayListShow(!this.playListShow)
+        togglePlayListShow() {
+            this.setPlayListShow(!this.playListShow);
+        },
+        percentChange(percent) {
+            const { durationSecond } = this.currentSong;
+            console.log("this.currentSong:", this.currentSong);
+            this.audio.currentTime = durationSecond * percent;
+            this.setPlayingState(true);
         }
     }
 };
@@ -251,6 +267,12 @@ export default {
     &__groups {
         @include flex-center();
         min-width: 300px;
+    }
+    .progress-wrap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -14px;
     }
     .icon {
         color: #c4463a;
