@@ -129,7 +129,6 @@ export default {
             this.$nextTick(() => {
                 scrollInto(this.$refs.commentTitle);
             });
-            console.log("1:", e);
         }
     }
 };
@@ -151,6 +150,9 @@ export default {
         // margin-top: 40px;
         &__comment {
             margin-bottom: 30px;
+        }
+        &:nth-child(1){
+            margin-bottom: 50px;
         }
     }
 }

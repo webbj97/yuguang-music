@@ -19,7 +19,7 @@ export default {
   name: 'Pagination',
   watch:{
       total(total){
-          console.log('total:', total);
+        //   console.log('total:', total);
       }
   }
 }
