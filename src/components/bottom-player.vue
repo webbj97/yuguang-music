@@ -25,8 +25,8 @@
         <div class="bottom-player__control">
             <Icon class="icon" :size="22" type="shangyiqu" @click="handlePrev" />
 
-            <div class="icon-box">
-                <Icon :type="playIcon" @click="onTogglePlay" />
+            <div class="icon-box" @click="onTogglePlay">
+                <Icon :type="playIcon" />
             </div>
 
             <Icon class="icon" :size="22" type="xiayiqu" @click="handleNext" />
@@ -117,6 +117,7 @@ export default {
     watch: {
         // 切换|清空|循环-歌曲
         currentSong(newSong, oldSong) {
+            console.log("oldSong:", oldSong.url);
             // 清空了歌曲
             if (!newSong.id) {
                 this.audio.pause();

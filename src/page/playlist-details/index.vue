@@ -13,7 +13,7 @@
 !<!-- 组件说明 -->
 <template>
     <div class="playlist-details" v-if="playlist.id">
-        <DetailsHeader :playlist="playlist" />
+        <DetailsHeader :playlist="playlist" ref="header" />
         <SongTable v-if="songs.length" :songs="songs" />
     </div>
 </template>
@@ -21,8 +21,8 @@
 <script>
 import { getListDetail, getSongDetail } from "@/api";
 import SongTable from "@/components/song-table";
-import DetailsHeader from './header';
-import { createSong } from "@/utils";
+import DetailsHeader from "./header";
+import { createSong, scrollInto } from "@/utils";
 import { Loading } from "element-ui";
 
 const MAX_LIST_LENGTH = 30;
@@ -63,6 +63,15 @@ export default {
             return Number(this.$route.params.id);
         }
     },
+    watch: {
+        id: {
+            handler() {
+                this.init();
+                this.scrollToHeader();
+            },
+            immediate: true
+        }
+    },
     mounted() {
         this.init();
     },
@@ -75,7 +84,10 @@ export default {
         },
         // 获取歌单内歌曲
         async getSonglist(playlist) {
-            const loadingInstance = Loading.service({ target: '.playlist-details', text: "加载中" });
+            const loadingInstance = Loading.service({
+                target: ".playlist-details",
+                text: "加载中"
+            });
             const trackIds = playlist.trackIds.map(({ id }) => id); // 歌曲id数组
             const { songs } = await getSongDetail(
                 trackIds.slice(0, MAX_LIST_LENGTH)
@@ -94,8 +106,13 @@ export default {
             );
             this.songs = newSongs;
             loadingInstance.close();
+        },
+        scrollToHeader() {
+            const { header } = this.$refs;
+            if (header) {
+                scrollInto(header.$el);
+            }
         }
-        // 调整song数据结构
     }
 };
 </script>

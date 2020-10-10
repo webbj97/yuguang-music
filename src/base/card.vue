@@ -3,7 +3,7 @@
         <slot name="img-wrap">
             <div class="img-wrap">
                 <img v-lazy="getImgUrl(img, 50)" />
-                <slot name="img-mask"></slot>
+                <PlayIcon v-if="showIcon" class="play-icon" />
             </div>
         </slot>
         <div class="content">
@@ -20,7 +20,7 @@ import { getImgUrl } from "@/utils";
 
 export default {
     name: "Card",
-    props: ["img", "name", "desc"],
+    props: ["img", "name", "desc", "showIcon"],
     methods: {
         getImgUrl,
         onClick(e) {
@@ -46,6 +46,9 @@ export default {
 
         img {
             border-radius: 4px;
+        }
+        .play-icon {
+            @include abs-center();
         }
     }
 

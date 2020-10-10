@@ -1,81 +1,99 @@
 <!-- 组件说明 -->
 <template>
     <div class="music-player" :class="{'show': musicPlayerShow}">
-        <div class="music-info">
-            <div class="music-wrap">
-                <div class="img-wrap">
-                    <img v-lazy="currentSong.img" :class="{'playing': playing}" alt="音乐" />
+        <div class="container-box">
+            <div class="music-info">
+                <div class="music-wrap">
+                    <div class="img-wrap">
+                        <img v-lazy="currentSong.img" :class="{'playing': playing}" alt="音乐" />
+                    </div>
                 </div>
-            </div>
-            <div class="lyric-wrap">
-                <p class="author-name">
-                    <span class="name">{{currentSong.name}}</span>
-                    <span class="tag">最高品质</span>
-                </p>
-                <p class="author-info">
-                    <span class="item">
-                        专辑：
-                        <a class="item__val" href="javascript:void(0);">{{currentSong.albumName}}</a>
-                    </span>
-                    <span class="item">
-                        歌手：
-                        <a
-                            class="item__val"
-                            href="javascript:void(0);"
-                        >{{currentSong.artistsText}}</a>
-                    </span>
-                </p>
-                <div class="lyric">
-                    <PageDefault v-if="nolyric" message="暂未找到歌词" :hasIcon="false" />
-                    <MainScroll
-                        class="main-scroll"
-                        :data="lyric"
-                        @init="initScroller"
-                        ref="scroller"
-                    >
-                        <div>
-                            <div
-                                v-for="(item, index) in lyricWithTranslation"
-                                :key="index"
-                                class="item-lyric"
-                                :class="{'active': isActiveLyric(index) }"
-                                ref="lyric"
-                            >
-                                <p
-                                    v-for="(tItem, idx) in item.contents"
-                                    :key="idx"
-                                    class="same-lyric"
-                                >{{tItem}}</p>
-                            </div>
-                        </div>
-                    </MainScroll>
-                </div>
-            </div>
-        </div>
-        <div class="music-bottom">
-            <div class="left">
-                <Comments v-if="CommentsId" :id="CommentsId" type="song" ref="comments" />
-            </div>
-            <div class="right" v-if="simiListShow">
-                <div class="simi-box">
-                    <p class="title">包含这首歌的歌单</p>
-                    <div
-                        :key="simiPlaylist.id"
-                        class="simi-item"
-                        v-for="simiPlaylist in simiPlaylists"
-                    >
-                        <Card
-                            :img="simiPlaylist.coverImgUrl"
-                            :name="simiPlaylist.name"
-                            @click="onClickPlaylist(simiPlaylist)"
+                <div class="lyric-wrap">
+                    <p class="author-name">
+                        <span class="name">{{currentSong.name}}</span>
+                        <span class="tag">最高品质</span>
+                    </p>
+                    <p class="author-info">
+                        <span class="item">
+                            专辑：
+                            <a
+                                class="item__val"
+                                href="javascript:void(0);"
+                            >{{currentSong.albumName}}</a>
+                        </span>
+                        <span class="item">
+                            歌手：
+                            <a
+                                class="item__val"
+                                href="javascript:void(0);"
+                            >{{currentSong.artistsText}}</a>
+                        </span>
+                    </p>
+                    <div class="lyric">
+                        <PageDefault v-if="nolyric" message="暂未找到歌词" :hasIcon="false" />
+                        <MainScroll
+                            class="main-scroll"
+                            :data="lyric"
+                            @init="initScroller"
+                            ref="scroller"
                         >
-                            <template v-slot:desc>
-                                <div class="desc">
-                                    <Icon :size="12" color="shallow" type="play" />
-                                    <p class="count">{{countUnit(simiPlaylist.playCount)}}</p>
+                            <div>
+                                <div
+                                    v-for="(item, index) in lyricWithTranslation"
+                                    :key="index"
+                                    class="item-lyric"
+                                    :class="{'active': isActiveLyric(index) }"
+                                    ref="lyric"
+                                >
+                                    <p
+                                        v-for="(tItem, idx) in item.contents"
+                                        :key="idx"
+                                        class="same-lyric"
+                                    >{{tItem}}</p>
                                 </div>
-                            </template>
-                        </Card>
+                            </div>
+                        </MainScroll>
+                    </div>
+                </div>
+            </div>
+            <div class="music-bottom">
+                <div class="left">
+                    <Comments v-if="CommentsId" :id="CommentsId" type="song" ref="comments" />
+                </div>
+                <div class="right" v-if="simiListShow">
+                    <div class="simi-box" v-if="simiPlaylists.length">
+                        <p class="title">包含这首歌的歌单</p>
+                        <div
+                            :key="simiPlaylist.id"
+                            class="simi-item"
+                            v-for="simiPlaylist in simiPlaylists"
+                        >
+                            <Card
+                                :img="simiPlaylist.coverImgUrl"
+                                :name="simiPlaylist.name"
+                                :showIcon="false"
+                                @click="onClickPlaylist(simiPlaylist)"
+                            >
+                                <template v-slot:desc>
+                                    <div class="desc">
+                                        <p class="count">{{countUnit(simiPlaylist.playCount)}}</p>
+                                    </div>
+                                </template>
+                            </Card>
+                        </div>
+                    </div>
+                    <div class="simi-box" v-if="simiSongs.length">
+                        <p class="title">相似歌曲</p>
+                        <div :key="simiSong.id" class="simi-item" v-for="simiSong in simiSongs">
+                            <Card
+                                :desc="simiSong.artistsText"
+                                :img="simiSong.img"
+                                :name="simiSong.name"
+                                :showIcon="true"
+                                @click="onClickSong(simiSong)"
+                            >
+                            </Card>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,7 +104,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { getLyric, getSimiPlaylists, getSimiSongs } from "@/api";
-import { isDef, lyricParser, countUnit } from "@/utils";
+import { isDef, lyricParser, countUnit, debounce, createSong } from "@/utils";
 import Comments from "@/components/comments";
 
 const WHEEL_TYPE = "wheel";
@@ -189,14 +207,25 @@ export default {
         }
     },
     watch: {
+        musicPlayerShow(value) {
+            if (value) {
+                // 歌词短期内不会变化 所以只拉取相似信息
+                this.initSimiList();
+                this.addResizeListener();
+                this.$nextTick(() => {
+                    this.scrollToActiveLyric();
+                });
+            } else {
+                this.removeResizeListener();
+            }
+        },
         currentSong(newSong, oldSong) {
             if (!newSong.id) {
                 this.setMusicPlayerShow(false);
                 return;
             }
             if (newSong.id === oldSong.id) return; // 同一首歌
-            console.log("切歌？");
-            console.log("this.isPlayerShow:", this.isPlayerShow);
+
             // 如果歌曲详情显示状态切歌 需要拉取歌曲相关信息
             if (this.musicPlayerShow) {
                 this.updateSong();
@@ -224,14 +253,12 @@ export default {
     },
     methods: {
         countUnit,
-        ...mapActions("music", ["setMusicPlayerShow"]),
+        ...mapActions("music", ["setMusicPlayerShow", "startSong"]),
         updateSong() {
-            console.log("出发了更新相关信息方法:");
             this.initlyric();
             this.initSimiList();
         },
         async initlyric() {
-            console.log('加载歌词:');
             const { id } = this.currentSong;
             const result = await getLyric(id);
             this.nolyric = !isDef(result.lrc) || !result.lrc.lyric;
@@ -292,9 +319,24 @@ export default {
                 getSimiSongs(currentSong.id)
             ]);
             this.simiPlaylists = dataSonglists.playlists;
-            this.simiSongs = dataSongs.songs;
-            console.log("this.simiPlaylists:", this.simiPlaylists);
-            console.log("this.simiSongs:", this.simiSongs);
+            this.simiSongs = dataSongs.songs.map(song => {
+                const {
+                    id,
+                    name,
+                    artists,
+                    mvid,
+                    album: { picUrl },
+                    duration
+                } = song;
+                return createSong({
+                    id,
+                    name,
+                    artists,
+                    duration,
+                    img: picUrl,
+                    mvId: mvid
+                });
+            });
         },
         // 点击相似歌单
         onClickPlaylist({ id }) {
@@ -304,6 +346,19 @@ export default {
             } else {
                 this.$router.push(`/playlist/${id}`);
             }
+        },
+        // 点击相似歌曲
+        onClickSong(song){
+            this.startSong(song);
+        },
+        resizeScroller: debounce(function() {
+            this.$refs.scroller.getScroller().refresh();
+        }, 500),
+        addResizeListener() {
+            window.addEventListener("resize", this.resizeScroller);
+        },
+        removeResizeListener() {
+            window.removeEventListener("resize", this.resizeScroller);
         }
     }
 };
@@ -326,12 +381,16 @@ export default {
     &.show {
         transform: none;
     }
+    .container-box {
+        max-width: 900px;
+        margin: 0 auto;
+    }
     .music-info {
         display: flex;
         justify-content: space-between;
         .music-wrap {
             display: flex;
-            height: 600px;
+            height: 550px;
             width: 50%;
             .img-wrap {
                 position: relative;
@@ -367,7 +426,7 @@ export default {
                 @include clo-center();
                 margin-bottom: 30px;
                 .name {
-                    font-size: $font-size-title-lg;
+                    font-size: 20px;
                 }
                 .tag {
                     margin-left: 5px;
@@ -380,7 +439,7 @@ export default {
                 }
             }
             .author-info {
-                margin-bottom: 30px;
+                margin-bottom: 40px;
                 @include clo-center();
                 .item {
                     padding-right: 10px;
@@ -441,7 +500,7 @@ export default {
             font-weight: $font-weight-bold;
             margin: 20px 0;
         }
-        .simi-item{
+        .simi-item {
             margin-bottom: 10px;
         }
     }
