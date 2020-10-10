@@ -439,7 +439,10 @@ export default {
         .title {
             font-size: $font-size-lg;
             font-weight: $font-weight-bold;
-            margin-bottom: 12px;
+            margin: 20px 0;
+        }
+        .simi-item{
+            margin-bottom: 10px;
         }
     }
     @keyframes rota {

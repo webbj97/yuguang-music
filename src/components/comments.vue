@@ -148,7 +148,7 @@ export default {
         }
     }
     .list {
-        margin-top: 40px;
+        // margin-top: 40px;
         &__comment {
             margin-bottom: 30px;
         }
