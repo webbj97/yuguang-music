@@ -6,7 +6,7 @@
 -->
 <template>
     <div class="page-default">
-        <Icon type="kongbaiye" :size="20" />
+        <Icon v-if="hasIcon" type="kongbaiye" :size="20" />
         <p class="">{{ msg }}</p>
     </div>
 </template>
@@ -17,13 +17,17 @@ export default {
     name: "PageDefault",
     props: {
         type: {
+            type: String,
             default: "", // no-network, no-content, no-filter, no-data, no-permission
-            type: String
         },
         message: {
+            type: String,
             default: "",
-            type: String
         },
+        hasIcon: {
+            type: Boolean,
+            default: true,
+        }
     },
     computed: {
         msg() {
@@ -50,5 +54,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 </style>

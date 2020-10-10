@@ -37,12 +37,11 @@ export default {
 
     },
     methods: {
-        ...mapActions("music", ["startSong", "setPlayList", "getLyric"]),
+        ...mapActions("music", ["startSong", "setPlayList"]),
         formatTime,
         handleRowClick(row) {
             this.startSong(row);
             this.setPlayList(this.songs);
-            this.getLyric(row.id);
         },
         //处理index
         indexMethod(index) {

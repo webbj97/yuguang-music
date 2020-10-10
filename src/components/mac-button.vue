@@ -33,7 +33,7 @@ export default {
         // 首页
         handleHome() {
             console.log("返回首页");
-            this.$router.push("/discovery"); // 返回推荐页
+            this.$router.push("/discover"); // 返回推荐页
         },
         // 退出全屏
         handleExitFull() {
