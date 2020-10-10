@@ -1,3 +1,9 @@
+/*
+ * @desc:
+ * @Author: 余光
+ * @Email: webbj97@163.com
+ * @Date: 2020-08-04 13:59:28
+ */
 export default {
     ['--body-bgcolor']: '#252525',
     ['--light-bgcolor']: '#2e2e2e',
@@ -28,7 +34,7 @@ export default {
     ['--menu-item-active-bg']: '#1b1b1b',
 
     //player
-    ['--player-bgcolor']: '#252525',
+    ['--player-bgcolor']: '#f8f7f8',
 
     //playlist
     ['--playlist-bgcolor']: '#363636',

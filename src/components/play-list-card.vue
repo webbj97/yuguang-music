@@ -41,7 +41,6 @@ export default {
     methods: {
         // 歌单详情
         onMoveList({ id }) {
-            console.log("1:", 1);
             this.$router.push(`/playlist/${id}`);
         }
     }

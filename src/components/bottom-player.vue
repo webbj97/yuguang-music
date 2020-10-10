@@ -4,7 +4,11 @@
         <!-- 信息 -->
         <div class="bottom-player__info">
             <template v-if="hasCurrentSong">
-                <div class="img-wrap">
+                <div class="img-wrap" @click="onShowPlayer">
+                    <div class="mask">
+                        <Icon :size="12" class="icon" type="houtui" />
+                        <Icon :size="12" class="icon" type="qianjin" />
+                    </div>
                     <img v-lazy="currentSong.img" alt="音乐图片" />
                 </div>
                 <div class="music-wrap">
@@ -45,7 +49,11 @@
         </div>
 
         <div class="progress-wrap">
-            <progressBar :disabled="false" :percent="playedPercent" @percentChange="percentChange" />
+            <progressBar
+                :disabled="!hasCurrentSong"
+                :percent="playedPercent"
+                @percentChange="percentChange"
+            />
         </div>
 
         <audio
@@ -62,6 +70,9 @@
 import { mapActions, mapGetters } from "vuex";
 import { formatTime, isDef, playModeMap } from "@/utils";
 
+const ICON_ZANTING = "zanting";
+const ICON_BOFANG = "bofang";
+
 export default {
     components: {},
     data() {
@@ -77,13 +88,14 @@ export default {
             "playMode",
             "prevSong",
             "nextSong",
-            "playListShow"
+            "playListShow",
+            "musicPlayerShow"
         ]),
         audio() {
             return this.$refs.audio;
         },
         playIcon() {
-            return this.playing ? "zanting" : "bofang";
+            return this.playing ? ICON_ZANTING : ICON_BOFANG;
         },
         hasCurrentSong() {
             return isDef(this.currentSong.id);
@@ -125,15 +137,13 @@ export default {
             this.timer = setTimeout(() => {
                 this.onPlay();
             }, 1000);
-
-            console.log('dasdasdad1:', 1);
         },
         playing(newPlaying) {
             console.log("play改变");
             this.$nextTick(() => {
                 newPlaying ? this.onPlay() : this.pause();
             });
-        },
+        }
     },
     mounted() {},
     methods: {
@@ -142,7 +152,8 @@ export default {
             "setCurrentTime",
             "setPlayMode",
             "startSong",
-            "setPlayListShow"
+            "setPlayListShow",
+            "setMusicPlayerShow"
         ]),
         formatTime,
         // 加载回调
@@ -207,11 +218,16 @@ export default {
         togglePlayListShow() {
             this.setPlayListShow(!this.playListShow);
         },
+        // 音乐进度改变
         percentChange(percent) {
             const { durationSecond } = this.currentSong;
             console.log("this.currentSong:", this.currentSong);
             this.audio.currentTime = durationSecond * percent;
             this.setPlayingState(true);
+        },
+        // 打开音乐播放
+        onShowPlayer() {
+            this.setMusicPlayerShow(!this.musicPlayerShow);
         }
     }
 };
@@ -237,10 +253,32 @@ export default {
         min-width: 300px;
         color: var(--font-color-white);
         .img-wrap {
+            position: relative;
             @include img-wrap(40px);
             margin-right: 8px;
             img {
                 border-radius: 4px;
+            }
+            .mask {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                border-radius: 4px;
+                background: rgba(0, 0, 0, 0.3);
+                transform: rotate(90deg);
+                transition: all 0.2s;
+                .icon {
+                    color: #fff;
+                }
+                &:hover {
+                    background: rgba(0, 0, 0, 0.6);
+                    cursor: pointer;
+                }
             }
         }
         .music-wrap {
@@ -262,6 +300,7 @@ export default {
             border-radius: 23px;
             color: $white;
             background: $theme-color;
+            cursor: pointer;
         }
     }
     &__groups {

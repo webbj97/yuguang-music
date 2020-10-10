@@ -55,7 +55,6 @@ export default {
             return user.nickname ? user.nickname : "";
         }
     },
-    watch: {},
     mounted() {},
     methods: {
         formatDate
@@ -66,7 +65,6 @@ export default {
 <style lang='scss' scoped>
 .comment {
     display: flex;
-    align-items: center;
     .img-wrap {
         margin-right: 8px;
         @include img-wrap(40px);

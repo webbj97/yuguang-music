@@ -52,7 +52,6 @@ export default {
     },
     methods: {
         progressClick(e) {
-            console.log("点击进度条:");
             const { pageX } = e;
             if (!this.disabled) {
                 const rect = this.$refs.progressBar.getBoundingClientRect(); // 元素的大小及其相对于视口的位
@@ -67,9 +66,9 @@ export default {
                 // // 这里当我们点击 progressBtn 的时候，e.offsetX 获取不对
                 this.changeLength(offsetWidth);
                 this.emitPercent();
-                console.log("offsetWidth:", offsetWidth);
             }
         },
+        // 进度条方法
         changeLength(offsetWidth) {
             const offsetRem = toCurrentRem(offsetWidth);
             this.$refs.progressOld.style.width = `${offsetRem}`;
@@ -77,13 +76,16 @@ export default {
                 transform
             ] = `translate3d(${offsetRem},0,0)`;
         },
+        // 触发更新
         emitPercent() {
             this.$emit("percentChange", this.getPercent());
         },
+        // 获取百分比
         getPercent() {
             const barWidth = this.$refs.progressBar.clientWidth;
             return this.$refs.progressOld.clientWidth / barWidth;
         },
+        // 设置进度条
         setProgressOffset(percent) {
             if (percent >= 0 && !this.touch.initiated) {
                 const barWidth = this.$refs.progressBar.clientWidth;

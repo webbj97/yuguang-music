@@ -6,4 +6,11 @@
  */
 import { request } from '@/utils'
 
-export const getSongDetail = ids => request.get(`/song/detail?ids=${ids}`); //歌曲详情
+// 歌曲详情
+export const getSongDetail = ids => request.get(`/song/detail?ids=${ids}`);
+
+// 歌词
+export const getLyric = id => request.get(`/lyric?id=${id}`);
+
+// 相似音乐
+export const getSimiSongs = (id, option) => request.get(`/simi/song?id=${id}`, option)

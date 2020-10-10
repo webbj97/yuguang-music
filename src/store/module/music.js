@@ -5,7 +5,15 @@
  * @Date: 2020-09-01 16:14:31
  */
 import { PLAY_HISTORY_KEY, getSongImg, playModeMap } from '@/utils'
-import { SET_CURRENT_SONG, SET_PLAY_STATE, SET_CURRENT_TIME, SET_PLAY_LIST, SET_PLAY_MODE, SET_PLAY_LIST_SHOW } from '../type.js'
+import {
+    SET_CURRENT_SONG,
+    SET_PLAY_STATE,
+    SET_CURRENT_TIME,
+    SET_PLAY_LIST,
+    SET_PLAY_MODE,
+    SET_PLAY_LIST_SHOW,
+    SET_MUSIC_PLAYER_SHOW
+} from '../type.js'
 
 function getRandomIndex(playList, currentIndex) {
     // 防止无限循环
@@ -86,7 +94,8 @@ const getters = {
         function getLoopNextIndex() {
             return getters.currentIndex
         }
-    }
+    },
+    musicPlayerShow: ({ musicPlayerShow }) => musicPlayerShow,
 };
 
 const actions = {
@@ -116,7 +125,6 @@ const actions = {
     },
     // 存储播放列表
     setPlayList({ commit }, playList) {
-        console.log('playList:', playList);
         commit('SET_PLAY_LIST', playList);
     },
     // 设置播放模式
@@ -124,8 +132,12 @@ const actions = {
         commit('SET_PLAY_MODE', code);
     },
     setPlayListShow({ commit }, show) {
-        commit('SET_PLAY_LIST_SHOW', show)
-    }
+        commit('SET_PLAY_LIST_SHOW', show);
+    },
+    setMusicPlayerShow({ commit }, show) {
+        commit('SET_MUSIC_PLAYER_SHOW', show);
+    },
+
 }
 
 const mutations = {
@@ -146,6 +158,9 @@ const mutations = {
     },
     [SET_PLAY_LIST_SHOW](state, show) {
         state.playListShow = show;
+    },
+    [SET_MUSIC_PLAYER_SHOW](state, show) {
+        state.musicPlayerShow = show;
     }
 };
 
@@ -161,5 +176,6 @@ export default {
         playMode: playModeMap.sequence.code, // 播放模式
         playList: [], // 播放列表数据
         playListShow: false, // 播放列表
+        musicPlayerShow: false, // 音乐播放页
     }
 }

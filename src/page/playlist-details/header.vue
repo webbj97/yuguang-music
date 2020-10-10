@@ -75,6 +75,7 @@ export default {
         }
     }
     .info {
+        flex: 1;
         &__name {
             display: flex;
             align-items: center;
@@ -113,8 +114,9 @@ export default {
         display: flex;
 
         font-size: 14px;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         &__title {
+            min-width: 45px;
             color: var(--font-color-white);
         }
         &__content {

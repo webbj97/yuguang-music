@@ -11,7 +11,7 @@
             <div class="img-wrap">
                 <img src="../assets/user.png" alt="头像" />
             </div>
-            <div class="user-nick">余光</div>
+            <div class="user-nick" @click="handleYg">余光</div>
         </div>
         <div class="menu__wrap">
             <ul class="item" v-for="(item, index) in menuList" :key="index">
@@ -35,8 +35,12 @@ export default {
         };
     },
     computed: {},
-    methods: {},
-    mounted() {}
+    mounted() {},
+    methods: {
+        handleYg() {
+            window.open("https://github.com/webbj97");
+        }
+    }
 };
 </script>
 
