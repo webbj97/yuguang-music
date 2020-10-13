@@ -11,6 +11,7 @@ const Discover = () => import('@/page/descover'); // 发现页面
 const PlaylistDetails = () => import('@/page/playlist-details'); // 发现页面
 const Mvs = () => import( /* webpackChunkName: "Songs" */ '@/page/mvs'); // 最新视频
 const Mv = () => import( /* webpackChunkName: "Songs" */ '@/page/mv'); // 视频详情
+const Rank = () => import( /* webpackChunkName: "Songs" */ '@/page/rank'); // 视频详情
 
 export const menuList = [{
         path: '/discover',
@@ -30,9 +31,18 @@ export const menuList = [{
             icon: 'ziyuan',
         },
     },
+    {
+        path: '/rank',
+        name: 'rank',
+        component: Rank,
+        meta: {
+            title: '排行榜',
+            icon: 'ziyuan',
+        },
+    },
 ]
 
-export const layoutCenterNames = ['discover', 'playlist', 'songs', 'mvs']
+export const layoutCenterNames = ['discover', 'playlist', 'songs', 'mvs', 'rank']
 
 Vue.use(Router)
 

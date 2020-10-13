@@ -12,6 +12,7 @@ export * from './song-list';
 export * from './song';
 export * from './mv';
 export * from './artist';
-export * from './playlist'
+export * from './playlist';
+export * from './rank.js';
 // export * from './search'
 // export * from './user'
