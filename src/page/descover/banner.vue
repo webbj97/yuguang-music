@@ -20,41 +20,9 @@ import { getBanner } from "@/api";
 import { getImgUrl } from "@/utils";
 
 export default {
-    components: {},
     data() {
         return {
-            banners: [
-                {
-                    imageUrl:
-                        "http://p1.music.126.net/sFKQL3mBS746WXORGksW5w==/109951165272555133.jpg",
-                    targetId: 1,
-                    targetType: 3000,
-                    titleColor: "blue",
-                    typeTitle: "数字专辑",
-                    url:
-                        "https://music.163.com/store/newalbum/detail?id=93262839"
-                },
-                {
-                    imageUrl:
-                        "http://p1.music.126.net/Vx5E1mynvP9l2msVqf7cLQ==/109951165272597730.jpg",
-                    targetId: 2,
-                    targetType: 3000,
-                    titleColor: "blue",
-                    typeTitle: "数字专辑",
-                    url:
-                        "https://music.163.com/store/newalbum/detail?id=93262839"
-                },
-                {
-                    imageUrl:
-                        "http://p1.music.126.net/DBtj1eYmMC3k0MZrJcndsg==/109951165272566925.jpg",
-                    targetId: 3,
-                    targetType: 3000,
-                    titleColor: "blue",
-                    typeTitle: "数字专辑",
-                    url:
-                        "https://music.163.com/store/newalbum/detail?id=93262839"
-                }
-            ]
+            banners: []
         };
     },
     computed: {},
