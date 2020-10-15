@@ -71,6 +71,7 @@ export default {
                 @include ellipsis();
             }
             &__author {
+                @include ellipsis();
                 font-size: 12px;
                 line-height: 20px;
             }

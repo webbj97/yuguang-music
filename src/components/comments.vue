@@ -21,15 +21,14 @@
                 :key="comment.id"
                 v-for="(comment, index) in comments"
             />
+            <Pagination
+                :current-page.sync="currentPage"
+                :page-size="pageSize"
+                :total="total"
+                @current-change="onPageChange"
+                class="pagination"
+            />
         </div>
-        <Pagination
-            :current-page.sync="currentPage"
-            :page-size="pageSize"
-            :total="total"
-            @current-change="onPageChange"
-            class="pagination"
-        />
-        <PageDefault v-if="!hasHotComments && !hotComments" message="暂无评论～" />
     </div>
 </template>
 
@@ -38,7 +37,7 @@ import {
     getMvComment,
     getHotComment,
     getSongComment,
-    getPlaylistComment
+    getPlaylistComment,
 } from "@/api";
 import { getPageOffset, scrollInto } from "@/utils";
 import Comment from "@/components/comment";
@@ -58,7 +57,7 @@ export default {
             comments: [],
             pageSize: PAGE_SIZE,
             currentPage: 1,
-            total: 0
+            total: 0,
         };
     },
     computed: {
@@ -69,7 +68,7 @@ export default {
         hasComments() {
             const { comments } = this;
             return comments.length > 0;
-        }
+        },
     },
     watch: {
         id: {
@@ -79,8 +78,8 @@ export default {
                     this.init();
                 }
             },
-            immediate: true
-        }
+            immediate: true,
+        },
     },
     mounted() {
         this.init();
@@ -91,17 +90,17 @@ export default {
             const commentRequestMap = {
                 [PLAYLIST_TYPE]: getPlaylistComment,
                 [SONG_TYPE]: getSongComment,
-                [MV_TYPE]: getMvComment
+                [MV_TYPE]: getMvComment,
             };
             const commentRequest = commentRequestMap[type];
             const {
                 hotComments = [],
                 comments = [],
-                total
+                total,
             } = await commentRequest({
                 id,
                 pageSize,
-                offset: getPageOffset(currentPage, pageSize)
+                offset: getPageOffset(currentPage, pageSize),
             }).finally(() => {
                 this.loading = false;
             });
@@ -109,10 +108,10 @@ export default {
             // 歌单的热评需要单独请求接口获取
             if (this.type === PLAYLIST_TYPE && this.currentPage === 1) {
                 const {
-                    hotComments: exactHotComments = []
+                    hotComments: exactHotComments = [],
                 } = await getHotComment({
                     id,
-                    type: 2 // 歌单type
+                    type: 2, // 歌单type
                 });
                 this.hotComments = exactHotComments;
             } else {
@@ -121,7 +120,6 @@ export default {
 
             this.comments = comments;
             this.total = total;
-            // this.total = 100;
             // this.$emit("update", { comments, hotComments, total });
         },
         async onPageChange(e) {
@@ -129,8 +127,8 @@ export default {
             this.$nextTick(() => {
                 scrollInto(this.$refs.commentTitle);
             });
-        }
-    }
+        },
+    },
 };
 </script>
 
@@ -151,7 +149,7 @@ export default {
         &__comment {
             margin-bottom: 30px;
         }
-        &:nth-child(1){
+        &:nth-child(1) {
             margin-bottom: 50px;
         }
     }

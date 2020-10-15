@@ -39,7 +39,7 @@
             </p>
         </div>
         <ul class="mvs__list" ref="mvlist">
-            <li class="mv-item" v-for="(mv,index) in mvs" :key="mv.id">
+            <li class="mv-item" v-for="mv in mvs" :key="mv.id">
                 <MvCard
                     :author="mv.artistName"
                     :duration="mv.duration"
@@ -74,29 +74,7 @@ export default {
     components: { MvCard },
     data() {
         return {
-            mvs: [
-                {
-                    artistId: 1074052,
-                    artistName: "ROMEO",
-                    id: 5469073,
-                    artists: [
-                        {
-                            id: 1074052,
-                            name: "ROMEO"
-                        }
-                    ],
-                    transNames: ["로미오"],
-                    briefDesc: null,
-                    cover:
-                        "http://p1.music.126.net/AW31RhAos_SJ_PHJl34Efw==/19212866183795417.jpg",
-                    desc: null,
-                    duration: 189000,
-                    mark: 0,
-                    name: "니가 없는데 (WITHOUT U) KBS音乐银行 17/03/24 现场版",
-                    playCount: 3311,
-                    subed: false
-                }
-            ],
+            mvs: [],
             areaTabs: [
                 { name: "全部", value: "全部" },
                 { name: "内地", value: "内地" },
@@ -133,7 +111,7 @@ export default {
         ...mapActions("mv", ["getMvs"]),
         async init() {
             const loadingInstance = Loading.service({
-                target: ".mvs__list",
+                target: ".mvs",
                 text: "加载中"
             });
             const {
@@ -189,6 +167,7 @@ export default {
 
 <style lang='scss' scoped>
 .mvs {
+    height: 100%;
     &__tabs {
         padding: 20px;
         font-size: 14px;
