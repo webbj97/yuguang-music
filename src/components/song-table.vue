@@ -13,7 +13,7 @@
             :stripe="stripe"
             @row-click="handleRowClick"
             :show-header="hasLabel"
-            empty-text="1"
+            empty-text=" "
         >
             <el-table-column
                 type="index"
