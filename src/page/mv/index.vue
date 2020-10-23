@@ -59,7 +59,6 @@
 
 <script>
 import { getMvDetail, getMvUrl, getSimiMv, getArtists } from "@/api";
-import { Loading } from "element-ui";
 import MvCard from "@/components/mv-card";
 import Comments from "@/components/comments";
 import { getImgUrl, formatDate } from "@/utils";
@@ -126,10 +125,6 @@ export default {
     methods: {
         getImgUrl,
         async init() {
-            const loadingInstance = Loading.service({
-                target: ".mv-details",
-                text: "加载中"
-            });
             const { id } = this;
             const [
                 { data: mvDetail },
@@ -147,8 +142,6 @@ export default {
             this.simiMvs = simiMvs; // 相似
 
             this.artist = artist;
-
-            loadingInstance.close();
         },
         onMoveMvs() {
             console.log("1:", 1);

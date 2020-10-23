@@ -4,7 +4,8 @@
  * @Email: webbj97@163.com
  * @Date: 2020-08-30 13:13:58
  */
-import { formatTime } from '@/utils';
+import { getAlbum } from '@/api';
+import { formatTime, isDef } from '@/utils';
 
 export function createSong(song) {
     const { id, name, img, artists, duration, albumId, albumName, mvId, ...rest } = song;
@@ -33,4 +34,15 @@ export function genArtistisText(artists) {
 
 function genSongPlayUrl(id) {
     return `https://music.163.com/song/media/outer/url?id=${id}.mp3`
+}
+
+export async function getSongImg(id, albumId) {
+    if (!isDef(albumId)) {
+        throw new Error('need albumId')
+    }
+    const { songs } = await getAlbum(albumId)
+    const {
+        al: { picUrl }
+    } = songs.find(({ id: songId }) => songId === id) || {}
+    return picUrl
 }

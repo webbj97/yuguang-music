@@ -283,6 +283,8 @@ export default {
             }
         }
         .music-wrap {
+            max-width: 500px;
+            overflow: hidden;
             line-height: 20px;
         }
     }

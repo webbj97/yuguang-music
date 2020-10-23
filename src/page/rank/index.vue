@@ -26,7 +26,6 @@
 
 <script>
 import { getRankList } from "@/api";
-import { Loading } from "element-ui";
 import PlayListCard from "@/components/play-list-card";
 export default {
     components: { PlayListCard },
@@ -47,10 +46,6 @@ export default {
     },
     methods: {
         async init() {
-            const loadingInstance = Loading.service({
-                target: ".rank",
-                text: "加载中",
-            });
             const { list } = await getRankList();
             const officialList = list.slice(0, 5);
             const globalList = list.slice(5);
@@ -58,7 +53,6 @@ export default {
                 this.createData(item)
             );
             this.globalList = globalList.map((item) => this.createData(item));
-            loadingInstance.close();
         },
         createData(data) {
             const { coverImgUrl, description, name, id } = data;

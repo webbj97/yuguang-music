@@ -64,12 +64,67 @@
     }
 }
 
-.el-pagination{
-    button{
-        background: transparent!important;
+.el-pagination {
+    button {
+        background: transparent !important;
     }
-    .el-pager li{
-        background: transparent!important;
+
+    .el-pager li {
+        background: transparent !important;
         color: var(--font-color-white);
     }
 }
+
+// input
+$input-height: 24px;
+
+@mixin el-input-style($color, $bg-color, $placeholder-color) {
+    .el-input__inner {
+        height: $input-height !important;
+        line-height: $input-height !important;
+        background: #{$bg-color} !important;
+        border: none !important;
+        color: #{$color} !important;
+
+        &:hover {
+            border: none !important;
+        }
+    }
+
+    .el-input__prefix {
+        i {
+            line-height: $input-height + 1px !important;
+            color: #{$color} !important;
+            transition: none !important;
+        }
+    }
+
+    input::-webkit-input-placeholder {
+        color: #{$placeholder-color} !important;
+    }
+}
+
+// 外部覆写input-theme样式
+@mixin el-input-theme($color, $bg-color, $placeholder-color: $color) {
+    /deep/.el-input {
+        @include el-input-style($color, $bg-color, $placeholder-color);
+    }
+}
+
+.el-input {
+    @include el-input-style(var(--input-color),
+        var(--input-bgcolor),
+        var(--font-color-grey-shallow));
+}
+// ele-ui loading颜色覆盖
+.el-loading-spinner {
+    circle {
+      stroke: $theme-color !important;
+    }
+    .el-loading-text {
+      color: $theme-color !important;
+    }
+    .el-icon-loading {
+      color: $theme-color !important;
+    }
+  }

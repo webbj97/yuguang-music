@@ -11,8 +11,9 @@ const Discover = () => import('@/page/descover'); // 发现页面
 const PlaylistDetails = () => import('@/page/playlist-details'); // 发现页面
 const Mvs = () => import( /* webpackChunkName: "Songs" */ '@/page/mvs'); // 最新视频
 const Mv = () => import( /* webpackChunkName: "Songs" */ '@/page/mv'); // 视频详情
-const Rank = () => import( /* webpackChunkName: "Songs" */ '@/page/rank'); // 视频详情
-const Songs = () => import( /* webpackChunkName: "Songs" */ '@/page/songs'); // 视频详情
+const Rank = () => import( /* webpackChunkName: "Songs" */ '@/page/rank'); // 排行榜单
+const Songs = () => import( /* webpackChunkName: "Songs" */ '@/page/songs'); // 新歌速递
+const Search = () => import( /* webpackChunkName: "Songs" */ '@/page/search'); // 搜索页
 
 export const menuList = [{
         path: '/discover',
@@ -49,10 +50,11 @@ export const menuList = [{
             title: '新歌速递',
             icon: 'new'
         }
-    }
+    },
+
 ]
 
-export const layoutCenterNames = ['discover', 'playlist', 'songs', 'mvs', 'rank', 'mv']
+export const layoutCenterNames = ['discover', 'playlist', 'songs', 'mvs', 'rank', 'mv', 'Search']
 
 Vue.use(Router)
 
@@ -72,6 +74,12 @@ export default new Router({
             name: 'mv',
             component: Mv,
             props: (route) => ({ id: +route.params.id }),
+        },
+        {
+            path: '/search/:keywords',
+            name: 'Search',
+            component: Search,
+            props: true,
         },
         ...menuList,
     ],

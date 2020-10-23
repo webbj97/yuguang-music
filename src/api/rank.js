@@ -1,4 +1,4 @@
 // 排行榜
-import { request } from '@/utils'
+import { requestLoading } from '@/utils'
 
-export const getRankList = () => request.get('/toplist')
+export const getRankList = () => requestLoading.get('/toplist')

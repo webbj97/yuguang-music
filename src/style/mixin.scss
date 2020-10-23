@@ -23,6 +23,7 @@
     }
 }
 
+// 定位居中
 @mixin abs-center {
     position: absolute;
     left: 50%;
@@ -30,6 +31,7 @@
     transform: translate(-50%, -50%);
 }
 
+// 盒子居中
 @mixin flex-center($direction: row) {
     display: flex;
     flex-direction: $direction;
@@ -37,6 +39,7 @@
     justify-content: center;
 }
 
+// 竖直居中
 @mixin clo-center() {
     display: flex;
     align-items: center;
@@ -54,4 +57,8 @@
     width: $d;
     height: $d;
     border-radius: 50%;
+}
+
+@mixin box-shadow {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
 }

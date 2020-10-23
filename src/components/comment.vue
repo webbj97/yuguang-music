@@ -82,11 +82,15 @@ export default {
         .name {
             color: $blue;
         }
+        .line-top{
+            color: var(--font-color-white);
+        }
         .line-bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: $gray;
+            font-size: 12px;
+            color: var(--font-color-grey);
         }
     }
 }
