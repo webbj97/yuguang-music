@@ -1,4 +1,4 @@
-import { request } from '@/utils';
+import { request, requestLoading } from '@/utils';
 import { GET_MVS } from '../type.js'
 
 const getters = {
@@ -7,7 +7,7 @@ const getters = {
 
 const actions = {
     async getMvs({ commit }, params) {
-        const res = await request.get('/mv/all', { params })
+        const res = await requestLoading.get('/mv/all', { params })
         commit('GET_MVS', res.data);
         return res;
     }

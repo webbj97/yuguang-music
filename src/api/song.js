@@ -7,7 +7,7 @@
 import { request, requestLoading } from '@/utils';
 
 // 歌曲详情
-export const getSongDetail = ids => request.get(`/song/detail?ids=${ids}`);
+export const getSongDetail = ids => requestLoading.get(`/song/detail?ids=${ids}`);
 
 // 歌词
 export const getLyric = id => request.get(`/lyric?id=${id}`);

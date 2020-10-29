@@ -7,18 +7,19 @@
 <template>
     <div class="header">
         <!-- 按钮组 -->
-        <div class="groups">
+        <div class="header__left">
             <!-- mac btn -->
             <MacButton />
             <!-- 路由记录 -->
             <RouterHistory />
         </div>
 
-        <!-- 换肤 -->
-        <el-popover placement="bottom" trigger="hover" width="200">
+        <div class="header__right">
+            <!-- 搜索 -->
+            <Search />
+            <!-- 换肤 -->
             <Theme />
-            <Icon class="pifu" type="pifu" slot="reference" />
-        </el-popover>
+        </div>
     </div>
 </template>
 
@@ -26,15 +27,16 @@
 import MacButton from "@/components/mac-button";
 import RouterHistory from "@/components/router-history";
 import Theme from "@/components/theme";
+import Search from "@/components/search";
 
 export default {
-    components: { MacButton, RouterHistory, Theme },
+    components: { MacButton, RouterHistory, Theme, Search },
     data() {
         return {};
     },
     computed: {},
     mounted() {},
-    methods: {}
+    methods: {},
 };
 </script>
 <style lang="scss" scoped>
@@ -47,11 +49,11 @@ export default {
     height: $header-height;
     background-color: var(--header-bgcolor);
     padding-right: 36px;
-    .groups{
+    &__left {
         @include clo-center();
     }
-    .pifu{
-        color: var(--font-color-white);
+    &__right {
+        @include clo-center();
     }
 }
 </style>

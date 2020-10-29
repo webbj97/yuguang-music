@@ -10,6 +10,7 @@
         font-size: 20px;
         font-weight: 500;
         margin: 20px 0;
+        color: var(--font-color-white);
         i{
             width: 16px;
             height: 16px;
@@ -41,7 +42,7 @@
 
         .avatar {
             @include img-wrap(60px);
-            margin-right: 8px;
+            margin-right: 12px;
 
             img {
                 @include round(60px);
@@ -49,6 +50,7 @@
         }
 
         .author {
+            color: var(--font-color-white);
             font-size: $font-size-lg;
         }
     }
@@ -60,6 +62,7 @@
         &__name {
             margin-bottom: 16px;
             font-size: $font-size-title-lg;
+            color: var(--font-color-white);
             font-weight: $font-weight-bold;
             @include ellipsis-more(2);
         }

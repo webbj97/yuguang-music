@@ -4,7 +4,7 @@
  * @Email: webbj97@163.com
  * @Date: 2020-09-01 16:14:31
  */
-import { PLAY_HISTORY_KEY, getSongImg, playModeMap } from '@/utils'
+import { getSongImg, playModeMap } from '@/utils'
 import {
     SET_CURRENT_SONG,
     SET_PLAY_STATE,
@@ -105,11 +105,12 @@ const actions = {
         // 1.不污染元数据
         // 2.单曲循环为了触发watch
         const song = Object.assign({}, rawSong)
-        // if (!song.img) {
-        //     if (song.albumId) {
-        //         song.img = await getSongImg(song.id, song.albumId)
-        //     }
-        // }
+        if (!song.img) {
+            if (song.albumId) {
+                song.img = await getSongImg(song.id, song.albumId)
+            }
+        }
+        console.log('2', rawSong);
 
         // 设置音乐
         commit('SET_CURRENT_SONG', song); // 保存数据

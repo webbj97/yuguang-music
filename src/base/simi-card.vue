@@ -20,12 +20,9 @@ import { getImgUrl } from "@/utils";
 export default {
     name: "SimiCard",
     props: ["imgCover", "name", "desc"],
-    components: {},
     data() {
         return {};
     },
-    computed: {},
-    mounted() {},
     methods: {
         getImgUrl
     }
@@ -55,11 +52,12 @@ export default {
             height: 40px;
             line-height: 20px;
             font-weight: 500;
+            color: var(--font-color-grey2);
             @include ellipsis-more(2);
         }
         &__desc{
             margin-top: 5px;
-            color: $gray;
+            color: var(--font-color-grey);
             @include ellipsis();
         }
     }

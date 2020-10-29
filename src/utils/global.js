@@ -5,6 +5,7 @@
  * @Date: 2020-08-04 16:38:35
  */
 import {
+    Input,
     Popover,
     Carousel,
     CarouselItem,
@@ -34,6 +35,7 @@ export default {
             }
         });
 
+        Vue.use(Input)
         Vue.use(Popover)
         Vue.use(Carousel)
         Vue.use(CarouselItem)

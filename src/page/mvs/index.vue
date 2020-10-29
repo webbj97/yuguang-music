@@ -65,7 +65,6 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import MvCard from "@/components/mv-card";
-import { Loading } from "element-ui";
 import { scrollInto } from "@/utils";
 
 const PAGE_SIZE = 24;
@@ -110,10 +109,6 @@ export default {
     methods: {
         ...mapActions("mv", ["getMvs"]),
         async init() {
-            const loadingInstance = Loading.service({
-                target: ".mvs",
-                text: "加载中"
-            });
             const {
                 areaCurrent,
                 typeCurrent,
@@ -132,7 +127,6 @@ export default {
 
             this.mvs = data;
             this.total = count || this.total;
-            loadingInstance.close();
         },
         // 分类
         handleTab(type, value) {
@@ -190,7 +184,6 @@ export default {
             cursor: pointer;
             &.current {
                 color: $music-color;
-                background: #fCf6f6;
             }
         }
     }
