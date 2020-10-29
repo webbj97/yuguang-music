@@ -4,6 +4,7 @@
         <el-input
             @click.native="onClickInput"
             @input="onInput"
+            @keypress.native.enter="onEnterPress"
             class="main-input"
             v-model.trim="input"
             prefix-icon="el-icon-search"
@@ -74,22 +75,11 @@ export default {
             input: "",
             searchPanelShow: false,
             suggest: {
-                artists: [
-                    {
-                        albumSize: 49,
-                        id: 3684,
-                        img1v1: 109951165400835890,
-                        img1v1Url:
-                            "https://p1.music.126.net/-nXVAQB1nsLgBwyJEuwcZQ==/109951165400835887.jpg",
-                        name: "林俊杰",
-                        picId: 109951165400836900,
-                        picUrl:
-                            "https://p1.music.126.net/jggnnZ0OIJjuj4Wmn-d-IQ==/109951165400836892.jpg",
-                        trans: null,
-                    },
-                ],
+                artists: [],
+                songs: [],
             }, // 搜索推荐
             hotSearchs: [], // 热门搜索
+            searchHistorys: storage.get(SEARCH_HISTORY_KEY, []),
         };
     },
     computed: {
@@ -97,23 +87,13 @@ export default {
             const { input, suggest } = this;
             return (
                 input.length &&
-                ["songs"].find((key) => {
+                ["songs", "playlists"].find((key) => {
                     return suggest[key] && suggest[key].length;
                 })
             );
         },
         normalizedData() {
             return [
-                {
-                    title: "歌手",
-                    icon: "geren",
-                    data: this.suggest.artists,
-                    onClick: this.onClickArtists.bind(this),
-                    render: (item) => {
-                        const { name } = item;
-                        return name;
-                    },
-                },
                 {
                     title: "单曲",
                     icon: "yinle",
@@ -128,23 +108,23 @@ export default {
                     },
                 },
                 {
-                    title: "专辑",
-                    icon: "zhuanji",
-                    data: this.suggest.albums,
-                    onClick: this.onClickAlbums.bind(this),
-                    render: (item) => {
-                        const {
-                            name,
-                            artist: { name: newName },
-                        } = item;
-                        return `${name} - ${newName}`;
-                    },
-                },
-                {
                     title: "歌单",
                     icon: "ziyuan",
                     data: this.suggest.playlists,
                     onClick: this.onClickPlaylists.bind(this),
+                },
+                {
+                    title: "mv",
+                    icon: "mv",
+                    data: this.suggest.mvs,
+                    render: (item) => {
+                        const {
+                            name,
+                            artists: [{ name: newName }],
+                        } = item;
+                        return `${name} - ${newName}`;
+                    },
+                    onClick: this.onClickMv.bind(this),
                 },
             ].filter((item) => item.data && item.data.length);
         },
@@ -209,22 +189,25 @@ export default {
             this.linkSearch(first);
         },
         linkSearch(keywords) {
-            // this.searchHistorys.push({ first: keywords });
-            // storage.set(SEARCH_HISTORY_KEY, this.searchHistorys);
+            this.searchHistorys.push({ first: keywords });
+            storage.set(SEARCH_HISTORY_KEY, this.searchHistorys);
             // this.$router.push(`/search/${keywords}`);
             this.searchPanelShow = false;
         },
-        onClickArtists(item) {
-            console.log(item);
-        },
-        onClickAlbums(item) {
-            console.log("onClickAlbums:", item);
-        },
         onClickPlaylists({ id }) {
             if (!id) return;
+
             this.$router.push(`/playlist/${id}`);
             this.searchPanelShow = false;
         },
+        onEnterPress() {
+            const { input } = this;
+            console.log("input:", input);
+            this.linkSearch(input);
+        },
+        onClickMv(e){
+            console.log('onClickMv:', e);
+        }
     },
 };
 </script>
