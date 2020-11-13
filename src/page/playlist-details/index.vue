@@ -14,7 +14,7 @@
 <template>
     <div class="playlist-details" v-if="playlist.id">
         <DetailsHeader :playlist="playlist" ref="header" />
-        <SongTable v-if="songs.length" :songs="songs" />
+        <SongTable class="song-table-com" v-if="songs.length" :songs="songs" />
     </div>
 </template>
 
@@ -91,5 +91,8 @@ export default {
 <style lang='scss' scoped>
 .playlist-details {
     padding: 20px;
+    .song-table-com{
+        margin-top: 40px;
+    }
 }
 </style>
