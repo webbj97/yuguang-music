@@ -1,4 +1,4 @@
-!<!-- 组件说明 -->
+<!-- 组件说明 -->
 <template>
     <div class="bottom-player">
         <!-- 信息 -->
@@ -13,17 +13,25 @@
                 </div>
                 <div class="music-wrap">
                     <div>
-                        <span>{{currentSong.name}}</span>
-                        <span>- {{currentSong.artistsText}}</span>
+                        <span>{{ currentSong.name }}</span>
+                        <span>- {{ currentSong.artistsText }}</span>
                     </div>
-                    <div>{{formatTime(currentTime)}} / {{currentSong.durationStr}}</div>
+                    <div>
+                        {{ formatTime(currentTime) }} /
+                        {{ currentSong.durationStr }}
+                    </div>
                 </div>
             </template>
         </div>
 
         <!-- 操作 -->
         <div class="bottom-player__control">
-            <Icon class="icon" :size="22" type="shangyiqu" @click="handlePrev" />
+            <Icon
+                class="icon"
+                :size="22"
+                type="shangyiqu"
+                @click="handlePrev"
+            />
 
             <div class="icon-box" @click="onTogglePlay">
                 <Icon :type="playIcon" />
@@ -34,8 +42,6 @@
 
         <!-- 操作 -->
         <div class="bottom-player__groups">
-            <!-- <Icon :size="20" type="playlist" @click="togglePlayListShow" /> -->
-
             <el-popover placement="top" trigger="hover" width="160">
                 <p>{{ playModeText }}</p>
                 <Icon
@@ -77,7 +83,7 @@ export default {
     components: {},
     data() {
         return {
-            songReady: false
+            songReady: false,
         };
     },
     computed: {
@@ -89,7 +95,7 @@ export default {
             "prevSong",
             "nextSong",
             "playListShow",
-            "musicPlayerShow"
+            "musicPlayerShow",
         ]),
         audio() {
             return this.$refs.audio;
@@ -112,7 +118,7 @@ export default {
         playedPercent() {
             const { durationSecond } = this.currentSong;
             return Math.min(this.currentTime / durationSecond, 1) || 0;
-        }
+        },
     },
     watch: {
         // 切换|清空|循环-歌曲
@@ -144,7 +150,7 @@ export default {
             this.$nextTick(() => {
                 newPlaying ? this.onPlay() : this.pause();
             });
-        }
+        },
     },
     mounted() {},
     methods: {
@@ -154,7 +160,7 @@ export default {
             "setPlayMode",
             "startSong",
             "setPlayListShow",
-            "setMusicPlayerShow"
+            "setMusicPlayerShow",
         ]),
         formatTime,
         // 加载回调
@@ -207,7 +213,7 @@ export default {
         onChangePlayMode() {
             const keyMaps = Object.keys(playModeMap);
             const currentIndex = keyMaps.findIndex(
-                item => item === this.playMode
+                (item) => item === this.playMode
             );
             const nextIndex = (currentIndex + 1) % keyMaps.length; // 下一个下标
             const nextModeKey = keyMaps[nextIndex]; // 属性
@@ -229,8 +235,8 @@ export default {
         // 打开音乐播放
         onShowPlayer() {
             this.setMusicPlayerShow(!this.musicPlayerShow);
-        }
-    }
+        },
+    },
 };
 </script>
 
@@ -309,6 +315,9 @@ export default {
     &__groups {
         @include flex-center();
         min-width: 300px;
+        .mode-item{
+            margin-right: 20px;
+        }
     }
     .progress-wrap {
         position: absolute;

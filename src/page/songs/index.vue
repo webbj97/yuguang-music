@@ -17,7 +17,7 @@
                 >{{ item.name }}</span
             >
         </div>
-        <div class="songs-content">
+        <div class="songs__content">
             <SongTable
                 :songs="songs"
                 :stripe="false"
@@ -95,8 +95,12 @@ export default {
 .songs {
     min-height: 100%;
     &__nav {
+        padding: 10px;
         height: 50px;
         line-height: 50px;
+    }
+    &__content{
+        padding-top: 40px;
     }
     .nav-item {
         color: var(--font-color-white);
