@@ -74,13 +74,15 @@ export default {
             position: absolute;
             top: 0;
             left: 0;
+            line-height: 1.5;
+            padding: 0 3px;
             width: 100%;
-            padding: 4px 10px;
             background: rgba(0, 0, 0, 0.1);
             color: $white;
             font-size: $font-size-sm;
             transform: translate(0, -100%);
             transition: all 0.2s;
+            @include ellipsis-more(3);
         }
         &__icon {
             position: absolute;

@@ -17,7 +17,7 @@
                         <span>- {{ currentSong.artistsText }}</span>
                     </div>
                     <div>
-                        {{ formatTime(currentTime) }} /
+                        {{ formatTime(currentTime) }}
                         {{ currentSong.durationStr }}
                     </div>
                 </div>

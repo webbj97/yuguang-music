@@ -5,6 +5,7 @@
             <YgTitle>官方榜</YgTitle>
             <div class="rank-wrap">
                 <PlayListCard
+                    class="play-list-card"
                     v-for="item in officialList"
                     :key="item.id"
                     :data="item"
@@ -15,6 +16,7 @@
             <YgTitle>全球榜</YgTitle>
             <div class="rank-wrap">
                 <PlayListCard
+                    class="play-list-card"
                     v-for="item in globalList"
                     :key="item.id"
                     :data="item"
@@ -80,7 +82,9 @@ export default {
     .rank-wrap {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        .play-list-card{
+            margin-right: 10px;
+        }
     }
 }
 </style>
