@@ -110,7 +110,6 @@ const actions = {
                 song.img = await getSongImg(song.id, song.albumId)
             }
         }
-        console.log('2', rawSong);
 
         // 设置音乐
         commit('SET_CURRENT_SONG', song); // 保存数据

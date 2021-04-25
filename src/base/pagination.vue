@@ -18,8 +18,8 @@ export default {
   props: ['pageSize', 'total'],
   name: 'Pagination',
   watch:{
-      total(total){
-        //   console.log('total:', total);
+      total(v){
+          console.log('v:', v);
       }
   }
 }

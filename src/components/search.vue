@@ -150,7 +150,6 @@ export default {
         // 点击
         onClickInput() {
             this.searchPanelShow = true;
-            console.log("触发了点击");
         },
         onInput: debounce(function (value) {
             if (!value.trim()) return;

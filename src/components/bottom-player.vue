@@ -123,7 +123,6 @@ export default {
     watch: {
         // 切换|清空|循环-歌曲
         currentSong(newSong, oldSong) {
-            console.log("oldSong:", oldSong.url);
             // 清空了歌曲
             if (!newSong.id) {
                 this.audio.pause();
@@ -183,7 +182,6 @@ export default {
         },
         // 播放
         async onPlay() {
-            console.log("this.songReady:", this.songReady);
             if (this.songReady) {
                 try {
                     await this.audio.play();
@@ -195,6 +193,8 @@ export default {
                     this.isPlayErrorPromptShow = true;
                     this.setPlayingState(false);
                 }
+            }else{
+                console.log('因版权或地址问题：歌曲播放失败');
             }
         },
         // 暂停

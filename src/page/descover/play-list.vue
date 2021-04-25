@@ -33,7 +33,6 @@ export default {
         async init() {
             const { result } = await getPersonalized({ limit: 10 });
             this.playlist = result;
-            // console.log("result:", result);
         }
     }
 };

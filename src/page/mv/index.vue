@@ -144,7 +144,6 @@ export default {
             this.artist = artist;
         },
         onMoveMvs() {
-            console.log("1:", 1);
             this.$router.push("/mvs");
         }
     }

@@ -33,6 +33,7 @@ yarn dev || npm run dev
 - [x] 歌单详情
 - [x] 最新音乐
 - [x] 主题换肤功能
+- [x] 悬浮位
 
 ### 后端接口
 
@@ -48,5 +49,7 @@ https://binaryify.github.io/NeteaseCloudMusicApi
 - ***Sass***（CSS 预处理器）
 
 ### 灵感涞源
+
+[网易云API](https://binaryify.github.io/NeteaseCloudMusicApi/#/)
 [ssH Player](https://github.com/sl1673495/vue-netease-music)
 

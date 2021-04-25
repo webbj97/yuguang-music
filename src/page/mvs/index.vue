@@ -130,7 +130,6 @@ export default {
         },
         // 分类
         handleTab(type, value) {
-            console.log("type:", type, value);
             switch (type) {
                 case "area":
                     this.areaCurrent = value;

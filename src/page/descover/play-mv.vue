@@ -111,7 +111,6 @@ export default {
         async init() {
             const { result } = await getPersonalizedMv();
             this.playMv = result;
-            console.log('this.playMv:', result);
         }
     }
 };
