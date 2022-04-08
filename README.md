@@ -6,6 +6,10 @@
 -->
 <h1 align=center>网易云音乐（余光）</h1>
 
+### 页面效果
+
+
+
 
 ### 运行步骤
 
@@ -22,6 +26,7 @@ yarn dev || npm run dev
 * 接口：axios
 * 状态管理：Vuex
 * 组件：element
+* 编辑器：VsCode
 
 ### 进度
 
@@ -34,6 +39,12 @@ yarn dev || npm run dev
 - [x] 最新音乐
 - [x] 主题换肤功能
 - [x] 悬浮位
+- [] 播放列表
+- [] 历史数据
+
+### Ts重构想法
+
+拥抱变化，尝试用Ts重构，ing
 
 ### 后端接口
 

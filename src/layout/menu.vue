@@ -13,9 +13,15 @@
             </div>
             <div class="user-nick" @click="handleYg">余光</div>
         </div>
+        <input type="text" v-model="input" v-number="11.11">
+        <button @click="aaaa">点击</button>
         <div class="menu__wrap">
             <ul class="item" v-for="(item, index) in menuList" :key="index">
-                <router-link class="link" active-class="link-active" :to="item.path">
+                <router-link
+                    class="link"
+                    active-class="link-active"
+                    :to="item.path"
+                >
                     <Icon :size="16" :type="item.meta.icon" class="iconfont" />
                     <span class="title">{{ item.meta.title }}</span>
                 </router-link>
@@ -26,12 +32,14 @@
 
 <script>
 import { menuList } from "@/router.js";
-//import x from ''
+
 export default {
     components: {},
     data() {
         return {
-            menuList
+            menuList,
+            visible: false,
+            input: 1
         };
     },
     computed: {},
@@ -39,8 +47,13 @@ export default {
     methods: {
         handleYg() {
             window.open("https://github.com/webbj97");
-        }
-    }
+        },
+        aaaa() {
+            this.$notify({
+                title: "notice",
+            });
+        },
+    },
 };
 </script>
 
