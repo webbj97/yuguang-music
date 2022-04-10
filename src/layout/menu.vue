@@ -13,8 +13,6 @@
             </div>
             <div class="user-nick" @click="handleYg">余光</div>
         </div>
-        <input type="text" v-model="input" v-number="11.11">
-        <button @click="aaaa">点击</button>
         <div class="menu__wrap">
             <ul class="item" v-for="(item, index) in menuList" :key="index">
                 <router-link

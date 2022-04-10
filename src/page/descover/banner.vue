@@ -39,9 +39,9 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 .banner-carousel {
-    /deep/.el-carousel__container {
+    .el-carousel__container {
         height: 200px;
     }
     &__item {

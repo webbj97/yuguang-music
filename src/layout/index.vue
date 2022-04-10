@@ -12,9 +12,9 @@
             <div class="layout-menu">
                 <LayoutMenu />
             </div>
-            <!-- <div class="content" id="page-content">
+            <div class="content" id="page-content">
                 <router-view :class="routerViewCls" />
-            </div> -->
+            </div>
         </div>
     </div>
 </template>

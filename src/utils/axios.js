@@ -7,7 +7,7 @@
 import axios from 'axios';
 import { Loading } from 'element-ui';
 
-const BASE_URL = 'https://api.mtnhao.com/';
+const BASE_URL = 'https://yuguang-netease-cloud-music-api.vercel.app/';
 // 不带全局loading的请求实例
 export const request = createBaseInstance();
 
