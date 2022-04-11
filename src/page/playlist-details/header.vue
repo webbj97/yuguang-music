@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { formatDate, countUnit } from "@/utils";
+import { formatDate, countUnit } from "@utils";
 
 export default {
     name: "DetailsHeader",

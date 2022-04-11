@@ -61,7 +61,7 @@
 import { getMvDetail, getMvUrl, getSimiMv, getArtists } from "@/api";
 import MvCard from "@/components/mv-card";
 import Comments from "@/components/comments";
-import { getImgUrl, formatDate } from "@/utils";
+import { getImgUrl, formatDate } from "@utils";
 
 export default {
     components: { MvCard, Comments },

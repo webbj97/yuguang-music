@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import {countUnit} from '@/utils';
+import {countUnit} from '@utils';
 export default {
     name: "PlayCount",
     props: ["count"],

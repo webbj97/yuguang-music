@@ -4,7 +4,7 @@
  * @Email: webbj97@163.com
  * @Date: 2020-09-14 15:07:40
  */
-import { request } from '@/utils'
+import { request } from '@utils'
 
 // 歌曲评论
 export const getSongComment = params => request.get(`/comment/music`, { params })

@@ -4,7 +4,7 @@
  * @Email: webbj97@163.com
  * @Date: 2020-09-01 16:14:31
  */
-import { getSongImg, playModeMap } from '@/utils'
+import { getSongImg, playModeMap } from '@utils'
 import {
     SET_CURRENT_SONG,
     SET_PLAY_STATE,

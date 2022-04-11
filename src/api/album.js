@@ -1,3 +1,3 @@
-import { request } from '@/utils';
+import { request } from '@utils';
 
 export const getAlbum = id => request.get(`/album?id=${id}`);

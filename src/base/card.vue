@@ -16,7 +16,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { getImgUrl } from "@/utils";
+import { getImgUrl } from "@utils";
 
 export default {
     name: "Card",

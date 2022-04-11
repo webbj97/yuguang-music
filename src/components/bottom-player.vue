@@ -74,7 +74,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { formatTime, isDef, playModeMap } from "@/utils";
+import { formatTime, isDef, playModeMap } from "@utils";
 
 const ICON_ZANTING = "zanting";
 const ICON_BOFANG = "bofang";

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { formatTime } from "@/utils";
+import { formatTime } from "@utils";
 
 export default {
     props: ["imgCover", "duration", "id", "name", "author", "playCount"],

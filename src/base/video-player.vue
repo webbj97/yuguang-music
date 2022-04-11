@@ -10,7 +10,7 @@
 
 <script type="text/ecmascript-6">
 import Player from "xgplayer";
-import { toRem } from "@/utils";
+import { toRem } from "@utils";
 
 export default {
     name: "VideoPlayer",

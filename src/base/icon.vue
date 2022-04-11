@@ -1,7 +1,7 @@
 
 
 <script type="text/ecmascript-6">
-import { toRem } from "@/utils";
+import { toRem } from "@utils";
 export default {
     name: "Icon",
     props: {

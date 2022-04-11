@@ -1,4 +1,4 @@
-import { request, requestLoading } from '@/utils';
+import { request, requestLoading } from '@utils';
 import { GET_MVS } from '../type.js'
 
 const getters = {

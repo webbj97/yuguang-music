@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import { getTopMusic } from "@/api";
+import { fetchLastMusic } from "@/api";
 import SongTable from "@/components/song-table";
-import { createSong } from "@/utils";
+import { createSong } from "@utils";
 
 const NAV_CONFIG = [
     { name: "全部", value: 0 },
@@ -65,7 +65,7 @@ export default {
         },
         async init() {
             const { type } = this;
-            const { data } = await getTopMusic({ type });
+            const { data } = await fetchLastMusic({ type });
             const newData = data.map((item) => {
                 const {
                     id,

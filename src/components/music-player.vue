@@ -104,7 +104,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { getLyric, getSimiPlaylists, getSimiSongs } from "@/api";
-import { isDef, lyricParser, countUnit, debounce, createSong } from "@/utils";
+import { isDef, lyricParser, countUnit, debounce, createSong } from "@utils";
 import Comments from "@/components/comments";
 
 const WHEEL_TYPE = "wheel";

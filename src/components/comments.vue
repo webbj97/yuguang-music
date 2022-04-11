@@ -39,7 +39,7 @@ import {
     getSongComment,
     getPlaylistComment,
 } from "@/api";
-import { getPageOffset, scrollInto } from "@/utils";
+import { getPageOffset, scrollInto } from "@utils";
 import Comment from "@/components/comment";
 
 const SONG_TYPE = "song"; // 歌曲

@@ -5,7 +5,7 @@
  * @Date: 2020-08-30 13:13:58
  */
 import { getAlbum } from '@/api';
-import { formatTime, isDef } from '@/utils';
+import { formatTime, isDef } from '@utils';
 
 export function createSong(song) {
     const { id, name, img, artists, duration, albumId, albumName, mvId, ...rest } = song;

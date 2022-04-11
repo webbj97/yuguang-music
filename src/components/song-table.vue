@@ -1,10 +1,3 @@
-<!--
- * @desc:
- * @Author: 余光
- * @Email: webbj97@163.com
- * @Date: 2020-09-02 18:45:04
--->
-!<!-- 组件说明 -->
 <template>
     <div class="song-table">
         <el-table
@@ -41,7 +34,7 @@
 </template>
 
 <script>
-import { formatTime, pad, getImgUrl } from "@/utils";
+import { formatTime, pad, getImgUrl } from "@utils";
 import { mapActions } from "vuex";
 
 export default {

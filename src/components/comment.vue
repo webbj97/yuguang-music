@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { formatDate } from "@/utils";
+import { formatDate } from "@utils";
 //import x from ''
 export default {
     name: "Comment",

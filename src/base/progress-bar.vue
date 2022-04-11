@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { prefixStyle, toCurrentRem } from "@/utils";
+import { prefixStyle, toCurrentRem } from "@utils";
 
 const transform = prefixStyle("transform");
 

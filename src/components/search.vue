@@ -63,7 +63,7 @@
 <script>
 import storage from "good-storage";
 import { getSearchSuggest, getSearchHot } from "@/api";
-import { debounce, createSong } from "@/utils";
+import { debounce, createSong } from "@utils";
 import { mapActions } from "vuex";
 
 const SEARCH_HISTORY_KEY = "BASE:SEARCH_HISTORY_LIST";

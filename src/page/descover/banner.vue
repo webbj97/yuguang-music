@@ -17,7 +17,7 @@
 
 <script>
 import { getBanner } from "@/api";
-import { getImgUrl } from "@/utils";
+import { getImgUrl } from "@utils";
 
 export default {
     data() {

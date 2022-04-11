@@ -29,7 +29,7 @@
 import PlaySongCard from "@/components/play-song-card";
 import { mapActions, mapGetters } from "vuex";
 import { getNewSongs } from "@/api";
-import { pad, createSong } from "@/utils";
+import { pad, createSong } from "@utils";
 
 export default {
     components: { PlaySongCard },

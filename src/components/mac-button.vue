@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { requestFullScreen, exitFullscreen, isFullscreen } from "@/utils";
+import { requestFullScreen, exitFullscreen, isFullscreen } from "@utils";
 export default {
     name: "MacButton",
     components: {},

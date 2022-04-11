@@ -1,0 +1,1 @@
+export const MAX_LIST_LENGTH = 30; // 歌单最大查询数量

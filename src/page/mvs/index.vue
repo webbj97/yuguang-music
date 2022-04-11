@@ -65,7 +65,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import MvCard from "@/components/mv-card";
-import { scrollInto } from "@/utils";
+import { scrollInto } from "@utils";
 
 const PAGE_SIZE = 24;
 

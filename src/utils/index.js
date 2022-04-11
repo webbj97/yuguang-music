@@ -11,4 +11,5 @@ export * from './rem'; // 基准字号
 export * from './config'; // 音乐播放配置
 export * from './dom'; // dom操作
 export * from './lrcparse.js'; //歌词处理
+
 // export * from './mixin'

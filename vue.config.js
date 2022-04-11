@@ -4,19 +4,32 @@
  * @Email: webbj97@163.com
  * @Date: 2020-08-03 11:14:43
  */
-
-const isProd = process.env.NODE_ENV === 'production'
+const path = require("path");
+const isProd = process.env.NODE_ENV === "production";
+function resolve(targetPath) {
+    return path.resolve(__dirname, targetPath);
+}
 
 module.exports = {
-  css: {
-    loaderOptions: {
-      sass: {
-        data: `
+    configureWebpack: {
+        resolve: {
+            alias: {
+                "@": resolve("src"),
+                "@utils": resolve("src/utils"),
+                "@services": resolve("src/services"),
+                "@constants": resolve("src/constants"),
+            },
+        },
+    },
+    css: {
+        loaderOptions: {
+            sass: {
+                data: `
             @import "~@/style/variables.scss";
             @import "~@/style/mixin.scss";
         `,
-      },
+            },
+        },
     },
-  },
-  publicPath: isProd ? '/yuguang-music/' : '/'
-}
+    publicPath: isProd ? "/yuguang-music/" : "/",
+};

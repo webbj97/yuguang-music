@@ -20,24 +20,23 @@
 
 <script>
 import { getListDetail, getSongDetail } from "@/api";
+import { MAX_LIST_LENGTH } from "@constants";
 import SongTable from "@/components/song-table";
 import DetailsHeader from "./header";
-import { createSong, scrollInto } from "@/utils";
-
-const MAX_LIST_LENGTH = 30;
+import { createSong, scrollInto } from "@utils";
 
 export default {
     components: { SongTable, DetailsHeader },
     data() {
         return {
             playlist: {},
-            songs: []
+            songs: [],
         };
     },
     computed: {
         id() {
             return Number(this.$route.params.id);
-        }
+        },
     },
     watch: {
         id: {
@@ -45,8 +44,8 @@ export default {
                 this.init();
                 this.scrollToHeader();
             },
-            immediate: true
-        }
+            immediate: true,
+        },
     },
     mounted() {
         this.init();
@@ -56,14 +55,17 @@ export default {
             const { id } = this;
             const { playlist } = await getListDetail({ id });
             this.playlist = playlist;
-            this.getSonglist(playlist);
+            this.fetchSongs(playlist);
         },
         // 获取歌单内歌曲
-        async getSonglist(playlist) {
-            const trackIds = playlist.trackIds.map(({ id }) => id); // 歌曲id数组
-            const { songs } = await getSongDetail(
-                trackIds.slice(0, MAX_LIST_LENGTH)
-            );
+        async fetchSongs(playlist) {
+            const trackIds = playlist.trackIds
+                .slice(0, MAX_LIST_LENGTH)
+                .map(({ id }) => +id);
+
+            const { songs } = await getSongDetail(trackIds);
+
+            console.log("songs>>>:", songs);
 
             const newSongs = songs.map(({ id, name, al, ar, mv, dt }) =>
                 createSong({
@@ -73,7 +75,7 @@ export default {
                     duration: dt,
                     mvId: mv,
                     albumName: al.name,
-                    img: al.picUrl
+                    img: al.picUrl,
                 })
             );
             this.songs = newSongs;
@@ -83,15 +85,15 @@ export default {
             if (header) {
                 scrollInto(header.$el);
             }
-        }
-    }
+        },
+    },
 };
 </script>
 
 <style lang='scss' scoped>
 .playlist-details {
     padding: 20px;
-    .song-table-com{
+    .song-table-com {
         margin-top: 40px;
     }
 }

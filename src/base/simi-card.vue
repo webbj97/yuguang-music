@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { getImgUrl } from "@/utils";
+import { getImgUrl } from "@utils";
 
 export default {
     name: "SimiCard",

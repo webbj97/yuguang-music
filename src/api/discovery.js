@@ -4,7 +4,7 @@
  * @Email: webbj97@163.com
  * @Date: 2020-08-27 14:44:35
  */
-import { request, requestLoading } from '@/utils';
+import { request, requestLoading } from '@utils';
 
 export const getBanner = () => request.get('/banner?type=0'); // 首页轮播
 
