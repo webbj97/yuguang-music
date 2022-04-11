@@ -1,16 +1,3 @@
-<!--
- * @desc:
- * @Author: 余光
- * @Email: webbj97@163.com
- * @Date: 2020-08-31 09:42:27
--->
-<!--
- * @desc:
- * @Author: 余光
- * @Email: webbj97@163.com
- * @Date: 2020-08-30 17:27:34
--->
-!<!-- 组件说明 -->
 <template>
     <div class="playlist-details" v-if="playlist.id">
         <DetailsHeader :playlist="playlist" ref="header" />
@@ -20,10 +7,10 @@
 
 <script>
 import { getListDetail, getSongDetail } from "@/api";
-import { MAX_LIST_LENGTH } from "@constants";
-import SongTable from "@/components/song-table";
-import DetailsHeader from "./header";
 import { createSong, scrollInto } from "@utils";
+import { MAX_LIST_LENGTH } from "@constants";
+import DetailsHeader from "./header";
+import SongTable from "@/components/song-table";
 
 export default {
     components: { SongTable, DetailsHeader },
@@ -53,7 +40,8 @@ export default {
     methods: {
         async init() {
             const { id } = this;
-            const { playlist } = await getListDetail({ id });
+            const { playlist = [] } = await getListDetail({ id });
+            console.log('playlist:', playlist);
             this.playlist = playlist;
             this.fetchSongs(playlist);
         },
@@ -64,8 +52,6 @@ export default {
                 .map(({ id }) => +id);
 
             const { songs } = await getSongDetail(trackIds);
-
-            console.log("songs>>>:", songs);
 
             const newSongs = songs.map(({ id, name, al, ar, mv, dt }) =>
                 createSong({

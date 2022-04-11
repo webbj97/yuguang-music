@@ -6,7 +6,7 @@
  */
 import Vue from 'vue'
 
-import App from './views/App.vue'
+import App from './App.vue'
 import router from './router'
 import store from './store/index.js'
 import UI from './components/index.js'; // 全局组件
@@ -14,13 +14,15 @@ import UI from './components/index.js'; // 全局组件
 import '@/style/index.scss'
 import '@utils/axios'
 
-import global from '@utils/global.js' // 全局配置
+import global from '@utils/global' // 全局配置
+
 
 Vue.config.productionTip = false
 Vue.use(global);
 Vue.use(UI);
 
-window.UI = UI;
+
+(window as any).UI = UI;
 
 new Vue({
   router,

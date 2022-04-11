@@ -9,7 +9,7 @@ import { Loading } from "element-ui";
 
 const BASE_URL = "https://yuguang-netease-cloud-music-api.vercel.app/";
 // 不带全局loading的请求实例
-const request = createBaseInstance();
+export const request = createBaseInstance();
 
 const defaults = {
     baseURL: BASE_URL,
@@ -88,6 +88,7 @@ function mixinLoading(interceptors) {
 }
 
 const auths = {};
+
 export function fetch(query = {}) {
     const params = { ...query };
 
@@ -184,8 +185,38 @@ export function get(url, data = {}, headers = {}) {
     });
 }
 
+/**
+ * http post 请求简单封装
+ * @export
+ * @param {String} url 请求的URL
+ * @param {Object} [data={}] 请求参数
+ * @param {Object} [data={}] 请求头
+ * @returns Promise
+ */
+ export function post(url, data = {}, headers = {}) {
+    return fetch({
+        url, data, method: 'post', headers,
+    });
+}
+
+/**
+ * http delete 请求简单封装
+ * @export
+ * @param {String} url 请求的URL
+ * @param {Object} [data={}] 请求参数
+ * @param {Object} [data={}] 请求头
+ * @returns Promise
+ */
+export function del(url, data = {}, headers = {}) {
+    return fetch({
+        url, data, method: 'delete', headers,
+    });
+}
+
 export default {
     request,
     fetch,
     get,
+    post,
+    del,
 };

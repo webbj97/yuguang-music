@@ -9,7 +9,6 @@ export * from './song';
 export * from './album'
 export * from './comment';
 export * from './discovery';
-export * from './song-list';
 export * from './mv';
 export * from './artist';
 export * from './playlist';
