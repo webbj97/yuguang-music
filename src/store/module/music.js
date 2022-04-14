@@ -34,6 +34,7 @@ const getters = {
     playList: ({ playList }) => playList,
     playMode: ({ playMode }) => playMode,
     playListShow: ({ playListShow }) => playListShow,
+    musicPlayerShow: ({ musicPlayerShow }) => musicPlayerShow,
     currentIndex: ({ currentSong, playList }) => {
         return playList.findIndex(({ id }) => id === currentSong.id);
     },
@@ -95,7 +96,6 @@ const getters = {
             return getters.currentIndex
         }
     },
-    musicPlayerShow: ({ musicPlayerShow }) => musicPlayerShow,
 };
 
 const actions = {

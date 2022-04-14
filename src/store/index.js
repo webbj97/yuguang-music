@@ -6,9 +6,9 @@
  */
 import Vue from 'vue';
 import Vuex from 'vuex';
-import descover from './module/descover.js'
-import music from './module/music.js'
-import mv from './module/mv.js'
+import descover from '@store/module/descover.js'
+import music from '@store/module/music.js'
+import mv from '@store/module/mv.js'
 
 export const actions = {};
 export const getters = {};

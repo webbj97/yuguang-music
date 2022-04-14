@@ -11,8 +11,7 @@
             <span
                 v-for="item in nav"
                 :key="item.value"
-                class="nav-item"
-                :class="{ isactive: item.value === type }"
+                :class="['nav-item', { 'is-active': item.value === type }]"
                 @click="onClickNav(item)"
                 >{{ item.name }}</span
             >
@@ -32,41 +31,30 @@
 import { fetchLastMusic } from "@/api";
 import SongTable from "@/components/song-table";
 import { createSong } from "@utils";
-
-const NAV_CONFIG = [
-    { name: "全部", value: 0 },
-    { name: "华语", value: 7 },
-    { name: "欧美", value: 96 },
-    { name: "韩国", value: 8 },
-    { name: "日本", value: 16 },
-];
+import { MUSIC_NAV } from "@constants";
 
 export default {
     components: { SongTable },
     data() {
         return {
-            nav: NAV_CONFIG,
+            nav: MUSIC_NAV,
             type: 0,
             songs: [],
         };
     },
     computed: {},
-    watch: {
-        type() {
-            this.init();
-        },
-    },
     mounted() {
         this.init();
     },
     methods: {
         onClickNav({ value }) {
             this.type = value;
+            this.init();
         },
         async init() {
             const { type } = this;
-            const { data } = await fetchLastMusic({ type });
-            const newData = data.map((item) => {
+            const res = await fetchLastMusic({ type });
+            const newData = res.map((item) => {
                 const {
                     id,
                     name,
@@ -99,14 +87,14 @@ export default {
         height: 50px;
         line-height: 50px;
     }
-    &__content{
+    &__content {
         padding-top: 40px;
     }
     .nav-item {
         color: var(--font-color-white);
         padding-right: 30px;
         cursor: pointer;
-        &.isactive {
+        &.is-active {
             font-weight: bold;
         }
     }

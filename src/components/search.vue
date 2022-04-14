@@ -62,7 +62,7 @@
 
 <script>
 import storage from "good-storage";
-import { getSearchSuggest, getSearchHot } from "@/api";
+import { getSearchSuggest, fetchSearchHot } from "@/api";
 import { debounce, createSong } from "@utils";
 import { mapActions } from "vuex";
 
@@ -143,7 +143,7 @@ export default {
         async init() {
             const {
                 result: { hots },
-            } = await getSearchHot();
+            } = await fetchSearchHot();
             this.hotSearchs = hots;
             console.log(this.hotSearchs);
         },

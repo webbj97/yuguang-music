@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { menuList } from "@/router.js";
+import { menuList } from "@/router";
 
 export default {
     components: {},

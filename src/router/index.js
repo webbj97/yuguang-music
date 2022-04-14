@@ -7,20 +7,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Discover = () => import('@/page/descover'); // 发现页面
-const PlaylistDetails = () => import('@/page/playlist-details'); // 发现页面
-const Mvs = () => import( /* webpackChunkName: "Songs" */ '@/page/mvs'); // 最新视频
-const Mv = () => import( /* webpackChunkName: "Songs" */ '@/page/mv'); // 视频详情
-const Rank = () => import( /* webpackChunkName: "Songs" */ '@/page/rank'); // 排行榜单
-const Songs = () => import( /* webpackChunkName: "Songs" */ '@/page/songs'); // 新歌速递
-const Search = () => import( /* webpackChunkName: "Songs" */ '@/page/search'); // 搜索页
+const Discover = () => import('@/views/descover'); // 发现页面
+const PlaylistDetails = () => import('@/views/playlist-details'); // 发现页面
+const Mvs = () => import( /* webpackChunkName: "Songs" */ '@/views/mvs'); // 最新视频
+const Mv = () => import( /* webpackChunkName: "Songs" */ '@/views/mv'); // 视频详情
+const Rank = () => import( /* webpackChunkName: "Songs" */ '@/views/rank'); // 排行榜单
+const Songs = () => import( /* webpackChunkName: "Songs" */ '@/views/songs'); // 新歌速递
+const Search = () => import( /* webpackChunkName: "Songs" */ '@/views/search'); // 搜索页
 
 export const menuList = [{
         path: '/discover',
         name: 'discover',
         component: Discover,
         meta: {
-            title: '发现音乐',
+            title: '个性推荐',
             icon: 'yinle',
         },
     },

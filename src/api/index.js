@@ -13,6 +13,4 @@ export * from './mv';
 export * from './artist';
 export * from './playlist';
 export * from './rank';
-export * from './search';
-export * from './test';
 // export * from './user'

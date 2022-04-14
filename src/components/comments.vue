@@ -5,9 +5,9 @@
             <p class="title">热门评论</p>
             <Comment
                 class="list__comment"
+                v-for="comment in hotComments"
                 :comment="comment"
                 :key="comment.id"
-                v-for="(comment, index) in hotComments"
             />
         </div>
         <div class="list" v-if="hasComments">
@@ -17,9 +17,9 @@
             </p>
             <Comment
                 class="list__comment"
-                :comment="comment"
+                v-for="comment in comments"
                 :key="comment.id"
-                v-for="(comment, index) in comments"
+                :comment="comment"
             />
             <Pagination
                 :current-page.sync="currentPage"
@@ -38,7 +38,7 @@ import {
     getHotComment,
     getSongComment,
     getPlaylistComment,
-} from "@/api";
+} from "../api";
 import { getPageOffset, scrollInto } from "@utils";
 import Comment from "@/components/comment";
 
@@ -49,7 +49,12 @@ const MV_TYPE = "mv"; // 视频
 const PAGE_SIZE = 20;
 
 export default {
-    props: ["id", "type"],
+    props: {
+        type: {
+            type: String,
+            default: "song",
+        },
+    },
     components: { Comment },
     data() {
         return {
@@ -97,8 +102,8 @@ export default {
                 hotComments = [],
                 comments = [],
                 total,
-            } = await commentRequest({
-                id,
+            } = await getSongComment({
+                id: "string",
                 pageSize,
                 offset: getPageOffset(currentPage, pageSize),
             }).finally(() => {
@@ -107,12 +112,11 @@ export default {
 
             // 歌单的热评需要单独请求接口获取
             if (this.type === PLAYLIST_TYPE && this.currentPage === 1) {
-                const {
-                    hotComments: exactHotComments = [],
-                } = await getHotComment({
-                    id,
-                    type: 2, // 歌单type
-                });
+                const { hotComments: exactHotComments = [] } =
+                    await getHotComment({
+                        id,
+                        type: 2, // 歌单type
+                    });
                 this.hotComments = exactHotComments;
             } else {
                 this.hotComments = hotComments;

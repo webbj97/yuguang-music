@@ -40,8 +40,8 @@ export default {
     methods: {
         async init() {
             const { id } = this;
-            const { playlist = [] } = await getListDetail({ id });
-            console.log('playlist:', playlist);
+            const res = await getListDetail({ id });
+            console.log('res:', res);
             this.playlist = playlist;
             this.fetchSongs(playlist);
         },

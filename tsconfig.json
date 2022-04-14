@@ -17,7 +17,9 @@
         "paths": {
             "@src/*": ["src/*"],
             "@services/*": ["src/services/*"],
-            "@utils/*": ["src/utils/*"]
+            "@utils/*": ["src/utils/*"],
+            "@api/*": ["src/api/*"],
+
         },
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
     },

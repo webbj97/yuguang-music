@@ -46,13 +46,14 @@ export default {
     },
     methods: {
         async init() {
-            const { list } = await getRankList();
-            const officialList = list.slice(0, 5);
-            const globalList = list.slice(5);
-            this.officialList = officialList.map((item) =>
-                this.createData(item)
-            );
-            this.globalList = globalList.map((item) => this.createData(item));
+            const res = await getRankList();
+            console.log('res:', res);
+            // const officialList = list.slice(0, 5);
+            // const globalList = list.slice(5);
+            // this.officialList = officialList.map((item) =>
+            //     this.createData(item)
+            // );
+            // this.globalList = globalList.map((item) => this.createData(item));
         },
         createData(data) {
             const { coverImgUrl, description, name, id } = data;

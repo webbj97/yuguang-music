@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Notification from './notify';
+import Notification from '@/components/notify';
 
 const install = function() {
     Vue.prototype.$notify = Notification;

@@ -55,7 +55,6 @@ export default {
             return user.nickname ? user.nickname : "";
         }
     },
-    mounted() {},
     methods: {
         formatDate
     }

@@ -22,7 +22,7 @@
 <script>
 import LayoutHeader from "./header";
 import LayoutMenu from "./menu";
-import { layoutCenterNames } from "@/router.js"
+import { layoutCenterNames } from "@/router"
 
 export default {
     components: { LayoutHeader, LayoutMenu },

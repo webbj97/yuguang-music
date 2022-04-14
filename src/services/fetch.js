@@ -105,11 +105,10 @@ export function fetch(query = {}) {
             if (res.isAxiosError) {
                 throw new Error(res);
             }
-            const { data } = res;
-            if (typeof data === "string" && /error/gm.test(data)) {
+            if (res.data === "string" && /error/gm.test(data)) {
                 throw new Error({ message: `${params.method}: ${params.url}` });
             }
-            return data.data || data;
+            return res;
         })
         .catch((e) => {
             const response = e.response || (e.message && e.message.response);
@@ -124,46 +123,8 @@ export function fetch(query = {}) {
 
                 console.log("FETCH PARAMS1:", params);
                 console.log("FETCH ERRORS1:", error ? error.message : message);
-
-                // if (message && !message.preventDefault) {
-                //     setTimeout(() => {
-                //         Vue.prototype.$notify({
-                //             showClose: true,
-                //             title: "接口请求错误",
-                //             type: "error",
-                //             duration: 5000,
-                //             message: error
-                //                 ? error.message
-                //                 : JSON.stringify(message),
-                //             isHTML: true,
-                //         });
-                //     }, 0);
-
-                //     throw new Error(
-                //         error ? error.message : message,
-                //         "XMLHttpRequest Error"
-                //     );
-                // }
             }
 
-            // const { message } = e;
-            // console.log("FETCH PARAMS2:", params);
-            // console.log("FETCH ERRORS2:", message, message.data);
-
-            // setTimeout(() => {
-            //     if (message && !message.preventDefault) {
-            //         Vue.prototype.$notify({
-            //             showClose: true,
-            //             title: "接口请求错误",
-            //             type: "error",
-            //             duration: 5000,
-            //             message: message.data
-            //                 ? message.data.message
-            //                 : message.data,
-            //             isHTML: true,
-            //         });
-            //     }
-            // }, 0);
             throw new Error(message, "XMLHttpRequest Error");
         });
 }
